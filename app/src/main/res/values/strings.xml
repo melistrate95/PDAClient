@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">PDAClient</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="no_connected">No connected</string>
 </resources>

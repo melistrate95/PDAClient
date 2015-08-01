@@ -11,8 +11,8 @@ public enum PostCategory {
     GAME_CATEGORY,
     FAVORITE_CATEGORY;
 
-    public static PostCategory getCategoryByString(String type) {
-        switch(type) {
+    public static PostCategory getCategoryByString(String category) {
+        switch(category) {
             case "NEWS_CATEGORY":
                 return NEWS_CATEGORY;
             case "ARTICLE_CATEGORY":

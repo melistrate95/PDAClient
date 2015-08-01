@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 
 import deadlion.com.pdaclient.model.Post;
+import deadlion.com.pdaclient.model.User;
 import deadlion.com.pdaclient.model.enum_model.PostCategory;
 
 /**
@@ -24,20 +25,32 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(DBData.getShortTableQuery() + DBData.getFullTableQuery());
+        db.execSQL(DBData.getShortTableQuery());
+        db.execSQL(DBData.getFullTableQuery());
+        db.execSQL(DBData.getAuthorsTableQuery());
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
-    public void addShortData(Post post) {
+    public void addAuthor(User user) {
+        db = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(DBData.AUTHOR_NAME, user.getUserLogin());
+        cv.put(DBData.AUTHOR_ID, user.getMemberId());
+        db.insert(DBData.AUTHORS_TABLE, null, cv);
+        db.close();
+    }
+
+    public void addShortPost(Post post) {
         db = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(DBData.CATEGORY, post.getPostCategory().toString());
         cv.put(DBData.POST_TITLE, post.getTitle());
         cv.put(DBData.PHOTO_URL, post.getPhotoUrl());
-        cv.put(DBData.DATA_OF_PUBLICATION, post.getDataOfPublication());
+        cv.put(DBData.AUTHOR_ID, post.getAuthor().getMemberId());
+        cv.put(DBData.DATE_OF_PUBLICATION, post.getDataOfPublication());
         cv.put(DBData.COUNT_OF_COMMENTS, post.getCountOfComments());
         cv.put(DBData.SHORT_POST_TEXT, post.getShortPostText());
         cv.put(DBData.POST_URL, post.getPostUrl());
@@ -45,15 +58,9 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void addFullData(Post post) {
+    public void addFullPost(Post post) {
         db = getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(DBData.CATEGORY, post.getPostCategory().toString());
-        cv.put(DBData.POST_TITLE, post.getTitle());
-        cv.put(DBData.PHOTO_URL, post.getPhotoUrl());
-        cv.put(DBData.DATA_OF_PUBLICATION, post.getDataOfPublication());
-        cv.put(DBData.COUNT_OF_COMMENTS, post.getCountOfComments());
-        cv.put(DBData.SHORT_POST_TEXT, post.getShortPostText());
         cv.put(DBData.POST_URL, post.getPostUrl());
         cv.put(DBData.FULL_POST_TEXT, post.getFullPostText());
         cv.put(DBData.POST_COMMENTS, post.getPostComments());
@@ -62,35 +69,15 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void fillShortDB(ArrayList<Post> postArrayList) {
-        db = getWritableDatabase();
-        for (int i = 0; i < postArrayList.size(); i ++) {
-            ContentValues cv = new ContentValues();
-            cv.put(DBData.CATEGORY, postArrayList.get(i).getPostCategory().toString());
-            cv.put(DBData.POST_TITLE, postArrayList.get(i).getTitle());
-            cv.put(DBData.PHOTO_URL, postArrayList.get(i).getPhotoUrl());
-            cv.put(DBData.DATA_OF_PUBLICATION, postArrayList.get(i).getDataOfPublication());
-            cv.put(DBData.COUNT_OF_COMMENTS, postArrayList.get(i).getCountOfComments());
-            cv.put(DBData.SHORT_POST_TEXT, postArrayList.get(i).getShortPostText());
-            cv.put(DBData.POST_URL, postArrayList.get(i).getPostUrl());
-            db.insert(DBData.SHORT_POST_TABLE, null, cv);
+        for (Post post : postArrayList) {
+            addShortPost(post);
         }
         db.close();
     }
 
     public void fillFullDB(ArrayList<Post> postArrayList) {
-        db = getWritableDatabase();
-        for (int i = 0; i < postArrayList.size(); i ++) {
-            ContentValues cv = new ContentValues();
-            cv.put(DBData.CATEGORY, postArrayList.get(i).getPostCategory().toString());
-            cv.put(DBData.POST_TITLE, postArrayList.get(i).getTitle());
-            cv.put(DBData.PHOTO_URL, postArrayList.get(i).getPhotoUrl());
-            cv.put(DBData.DATA_OF_PUBLICATION, postArrayList.get(i).getDataOfPublication());
-            cv.put(DBData.COUNT_OF_COMMENTS, postArrayList.get(i).getCountOfComments());
-            cv.put(DBData.SHORT_POST_TEXT, postArrayList.get(i).getShortPostText());
-            cv.put(DBData.POST_URL, postArrayList.get(i).getPostUrl());
-            cv.put(DBData.FULL_POST_TEXT, postArrayList.get(i).getFullPostText());
-            cv.put(DBData.POST_COMMENTS, postArrayList.get(i).getPostComments());
-            db.insert(DBData.FULL_POST_TABLE, null, cv);
+        for (Post post : postArrayList) {
+            addFullPost(post);
         }
         db.close();
     }
@@ -102,14 +89,16 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 if (cursor.getString(cursor.getColumnIndex(DBData.CATEGORY)).equals(category.toString())) {
+                    User author = getUserById(cursor.getString(cursor.getColumnIndex(DBData.AUTHOR_ID)));
                     Post post = new Post(
+                            PostCategory.getCategoryByString(cursor.getString(cursor.getColumnIndex(DBData.CATEGORY))),
                             cursor.getString(cursor.getColumnIndex(DBData.POST_TITLE)),
                             cursor.getString(cursor.getColumnIndex(DBData.PHOTO_URL)),
-                            cursor.getString(cursor.getColumnIndex(DBData.DATA_OF_PUBLICATION)),
-                            cursor.getString(cursor.getColumnIndex(DBData.COUNT_OF_COMMENTS)),
+                            author,
+                            cursor.getString(cursor.getColumnIndex(DBData.DATE_OF_PUBLICATION)),
+                            cursor.getInt(cursor.getColumnIndex(DBData.COUNT_OF_COMMENTS)),
                             cursor.getString(cursor.getColumnIndex(DBData.SHORT_POST_TEXT)),
-                            cursor.getString(cursor.getColumnIndex(DBData.POST_URL)),
-                            PostCategory.getCategoryByString(cursor.getString(cursor.getColumnIndex(DBData.CATEGORY)))
+                            cursor.getString(cursor.getColumnIndex(DBData.POST_URL))
                     );
                     arrayList.add(post);
                 }
@@ -120,34 +109,67 @@ public class DBHelper extends SQLiteOpenHelper {
         return arrayList;
     }
 
-    public Post getFullFavoritePost(int index) {
+    public User getUserById(String id) {
         db = getWritableDatabase();
-        Cursor cursor = db.query(DBData.FULL_POST_TABLE, null, null, null, null, null, null);
+        User author = null;
+        Cursor cursor = db.query(DBData.AUTHORS_TABLE, null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
-            int i = 0;
             do {
-                if (cursor.getString(cursor.getColumnIndex(DBData.CATEGORY)).equals(PostCategory.FAVORITE_CATEGORY.toString())) {
-                    if (i == index) {
-                        Post post = new Post(
-                                cursor.getString(cursor.getColumnIndex(DBData.POST_TITLE)),
-                                cursor.getString(cursor.getColumnIndex(DBData.PHOTO_URL)),
-                                cursor.getString(cursor.getColumnIndex(DBData.DATA_OF_PUBLICATION)),
-                                cursor.getString(cursor.getColumnIndex(DBData.COUNT_OF_COMMENTS)),
-                                cursor.getString(cursor.getColumnIndex(DBData.SHORT_POST_TEXT)),
-                                cursor.getString(cursor.getColumnIndex(DBData.POST_URL)),
-                                PostCategory.FAVORITE_CATEGORY
-                        );
-                        post.setFullPostText(cursor.getString(cursor.getColumnIndex(DBData.FULL_POST_TEXT)));
-                        post.setCountOfComments(cursor.getString(cursor.getColumnIndex(DBData.COUNT_OF_COMMENTS)));
-                        return post;
-                    }
-                    i ++;
+                if (cursor.getString(cursor.getColumnIndex(DBData.AUTHOR_ID)).equals(id)) {
+                    author = new User(cursor.getString(cursor.getColumnIndex(DBData.AUTHOR_NAME)), id);
+                    return author;
                 }
             } while (cursor.moveToNext());
         }
         cursor.close();
         db.close();
-        return null;
+        return author;
+    }
+
+    public Post getShortFavoritePost(String urlPost) {
+        db = getWritableDatabase();
+        Post post = null;
+        Cursor cursor = db.query(DBData.SHORT_POST_TABLE, null, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            do {
+                if (cursor.getString(cursor.getColumnIndex(DBData.CATEGORY)).equals(PostCategory.FAVORITE_CATEGORY.toString())) {
+                    User author = getUserById(cursor.getString(cursor.getColumnIndex(DBData.AUTHOR_ID)));
+                    post = new Post(
+                            PostCategory.getCategoryByString(cursor.getString(cursor.getColumnIndex(DBData.CATEGORY))),
+                            cursor.getString(cursor.getColumnIndex(DBData.POST_TITLE)),
+                            cursor.getString(cursor.getColumnIndex(DBData.PHOTO_URL)),
+                            author,
+                            cursor.getString(cursor.getColumnIndex(DBData.DATE_OF_PUBLICATION)),
+                            cursor.getInt(cursor.getColumnIndex(DBData.COUNT_OF_COMMENTS)),
+                            cursor.getString(cursor.getColumnIndex(DBData.SHORT_POST_TEXT)),
+                            cursor.getString(cursor.getColumnIndex(DBData.POST_URL))
+                    );
+                    return post;
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return post;
+    }
+
+    public Post getFullFavoritePost(String urlPost) {
+        db = getWritableDatabase();
+        Post post = null;
+        Cursor cursor = db.query(DBData.FULL_POST_TABLE, null, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            do {
+                if (cursor.getString(cursor.getColumnIndex(DBData.CATEGORY)).equals(PostCategory.FAVORITE_CATEGORY.toString())) {
+                    post = getShortFavoritePost(urlPost);
+                    post.setFullPostText(cursor.getString(cursor.getColumnIndex(DBData.FULL_POST_TEXT)));
+                    post.setPostComments(cursor.getString(cursor.getColumnIndex(DBData.POST_COMMENTS)));
+                    return post;
+                }
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return post;
     }
 
     public void removeShortPosts(PostCategory category) {
@@ -156,9 +178,11 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void removeFullPosts(PostCategory category) {
+    public void removeFullPosts(PostCategory category, String urlPost) {
         db = getWritableDatabase();
-        db.delete(DBData.FULL_POST_TABLE, DBData.CATEGORY + " = " + category.toString(), null);
+        db.delete(DBData.FULL_POST_TABLE,
+                DBData.CATEGORY + " = " + category.toString() + " " + DBData.POST_URL + " = " + urlPost,
+                null);
         db.close();
     }
 

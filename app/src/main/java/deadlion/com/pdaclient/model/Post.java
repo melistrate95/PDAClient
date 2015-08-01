@@ -1,5 +1,7 @@
 package deadlion.com.pdaclient.model;
 
+import java.util.Date;
+
 import deadlion.com.pdaclient.model.enum_model.PostCategory;
 
 /**
@@ -9,95 +11,72 @@ public class Post {
     private PostCategory postCategory;
     private String title;
     private String photoUrl;
+    private User author;
     private String dataOfPublication;
-    private String countOfComments;
+    private int countOfComments;
     private String shortPostText;
     private String postUrl;
 
     private String fullPostText;
     private String postComments;
 
-    public String getTitle() {
-        return title;
+    public PostCategory getPostCategory() {
+        return postCategory;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getTitle() {
+        return title;
     }
 
     public String getPhotoUrl() {
         return photoUrl;
     }
 
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
+    public User getAuthor() {
+        return author;
     }
 
     public String getDataOfPublication() {
         return dataOfPublication;
     }
 
-    public void setDataOfPublication(String dataOfPublication) {
-        this.dataOfPublication = dataOfPublication;
-    }
-
-    public String getCountOfComments() {
+    public int getCountOfComments() {
         return countOfComments;
-    }
-
-    public void setCountOfComments(String countOfComments) {
-        this.countOfComments = countOfComments;
     }
 
     public String getShortPostText() {
         return shortPostText;
     }
 
-    public void setShortPostText(String shortPostText) {
-        this.shortPostText = shortPostText;
-    }
-
     public String getPostUrl() {
         return postUrl;
-    }
-
-    public void setPostUrl(String postUrl) {
-        this.postUrl = postUrl;
     }
 
     public String getFullPostText() {
         return fullPostText;
     }
 
-    public void setFullPostText(String fullPostText) {
-        this.fullPostText = fullPostText;
-    }
-
     public String getPostComments() {
         return postComments;
+    }
+
+    public void setFullPostText(String fullPostText) {
+        this.fullPostText = fullPostText;
     }
 
     public void setPostComments(String postComments) {
         this.postComments = postComments;
     }
 
-    public PostCategory getPostCategory() {
-        return postCategory;
-    }
-
-    public void setPostCategory(PostCategory postCategory) {
+    public Post(PostCategory postCategory, String title, String photoUrl, User author, String dataOfPublication, int countOfComments, String shortPostText, String postUrl) {
         this.postCategory = postCategory;
-    }
-
-    public Post(String title, String photoUrl, String dataOfPublication,
-                String countOfComments, String shortPostText, String postUrl, PostCategory postCategory) {
         this.title = title;
         this.photoUrl = photoUrl;
+        this.author = author;
         this.dataOfPublication = dataOfPublication;
         this.countOfComments = countOfComments;
         this.shortPostText = shortPostText;
         this.postUrl = postUrl;
-        this.postCategory = postCategory;
     }
 
     public Post() {
