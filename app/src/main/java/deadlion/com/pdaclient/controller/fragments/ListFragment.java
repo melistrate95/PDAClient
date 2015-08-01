@@ -19,8 +19,9 @@ import deadlion.com.pdaclient.R;
 import deadlion.com.pdaclient.model.Post;
 import deadlion.com.pdaclient.model.User;
 import deadlion.com.pdaclient.model.enum_model.PostCategory;
+import deadlion.com.pdaclient.view.adapter.PostAdapter;
 
-public class VisibleFragment extends Fragment {
+public class ListFragment extends Fragment {
 
     SwipeRefreshLayout mSwipeRefreshLayout;
     ListView listView;
@@ -37,7 +38,8 @@ public class VisibleFragment extends Fragment {
         posts.add(new Post(PostCategory.FAVORITE_CATEGORY, "xx", "xx", new User("xx", "ololo"), "xx", 10, "xx", "xx"));
         posts.add(new Post(PostCategory.FAVORITE_CATEGORY, "xx", "xx", new User("xx", "ololo"), "xx", 10, "xx", "xx"));
         posts.add(new Post(PostCategory.FAVORITE_CATEGORY, "xx", "xx", new User("xx", "ololo"), "xx", 10, "xx", "xx"));
-        postAdapter = new PostAdapter(posts);
+        postAdapter = new PostAdapter(getActivity(), posts);
+        postAdapter.setNotifyOnChange(true);
     }
 
     @Override
@@ -47,44 +49,5 @@ public class VisibleFragment extends Fragment {
         listView.setDivider(getResources().getDrawable(android.R.color.transparent));
         listView.setAdapter(postAdapter);
         return view;
-    }
-
-
-    private class PostAdapter extends ArrayAdapter<Post> {
-
-        public PostAdapter(ArrayList<Post> posts) {
-            super(getActivity(), 0, posts);
-        }
-
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = getActivity().getLayoutInflater().inflate(R.layout.item_post, null);
-            }
-
-            Post post = getItem(position);
-
-            TextView titleTextView = (TextView) convertView.findViewById(R.id.news_title);
-            titleTextView.setText(post.getTitle());
-
-            ImageView photoImageView = (ImageView)convertView.findViewById(R.id.news_photo);
-            Picasso.with(getContext())
-                    .load(post.getPhotoUrl())
-                    .into(photoImageView);
-
-            TextView dataTextView = (TextView) convertView.findViewById(R.id.news_data);
-            dataTextView.setText(post.getShortPostText());
-
-            TextView dateOfPublicationView = (TextView) convertView.findViewById(R.id.date_of_publication);
-            dateOfPublicationView.setText(post.getDataOfPublication());
-
-            TextView authorView = (TextView) convertView.findViewById(R.id.name_author);
-            authorView.setText(post.getAuthor().getUserLogin());
-
-            TextView countCommentView = (TextView) convertView.findViewById(R.id.count_comment);
-            countCommentView.setText(post.getCountOfComments() + "");
-
-
-            return convertView;
-        }
     }
 }
