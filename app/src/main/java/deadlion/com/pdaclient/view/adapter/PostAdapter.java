@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import deadlion.com.pdaclient.R;
 import deadlion.com.pdaclient.model.Post;
+import deadlion.com.pdaclient.view.listener.OnPostOverflowSelectedListener;
 
 /**
  * Created by Mike on 01.08.2015.
@@ -42,6 +43,9 @@ public class PostAdapter extends ArrayAdapter<Post> {
         }
 
         Post post = getItem(position);
+
+        View overflow = convertView.findViewById(R.id.post_overflow);
+        overflow.setOnClickListener(new OnPostOverflowSelectedListener(context, post));
 
         TextView titleTextView = (TextView) convertView.findViewById(R.id.news_title);
         titleTextView.setText(post.getTitle());

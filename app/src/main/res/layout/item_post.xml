@@ -14,15 +14,14 @@
         card_view:cardCornerRadius="5dp"
         card_view:contentPadding="10dp"
         card_view:cardElevation="5dp">
-
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1">
 
             <FrameLayout
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:layout_gravity="bottom">
                 <ImageView
@@ -47,7 +46,18 @@
                     android:shadowDy="2"
                     android:shadowRadius="5"
                     android:shadowColor="#ff000000" />
+                <ImageView
+                    android:id="@+id/post_overflow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|right"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_overflow_black"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/selector"/>
             </FrameLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Учетная запись">
+        <Preference
+            android:title="Выйти"
+            android:summary=""
+            android:key="exitPreference" >
+        </Preference>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Персонализация">
+        <Preference
+            android:title="Тема"
+            android:summary=""
+            android:key="themePreference" >
+        </Preference>
+        <Preference
+            android:title="Шрифт постов"
+            android:summary=""
+            android:key="postFontPreference" >
+        </Preference>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Прочее">
+        <Preference
+            android:title="О программе"
+            android:summary=""
+            android:key="aboutPreference" >
+        </Preference>
+</PreferenceCategory>
+</PreferenceScreen>
