@@ -17,6 +17,6 @@ public class MainActivity extends ToolbarActivity {
         super.onCreate(savedInstanceState);
 
         manager = getFragmentManager();
-        manager.beginTransaction().add(R.id.container, new ListFragment()).commit();
+        manager.beginTransaction().replace(R.id.container, new ListFragment()).commit();
     }
 }
