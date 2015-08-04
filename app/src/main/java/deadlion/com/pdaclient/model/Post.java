@@ -1,21 +1,17 @@
 package deadlion.com.pdaclient.model;
 
-import java.util.Date;
-
 import deadlion.com.pdaclient.model.enum_model.PostCategory;
 
-/**
- * Created by Mike on 27.07.2015.
- */
 public class Post {
     private PostCategory postCategory;
+    private String postUrl;
+
     private String title;
     private String photoUrl;
-    private User author;
-    private String dataOfPublication;
+    private String dateOfPublication;
     private int countOfComments;
     private String shortPostText;
-    private String postUrl;
+    private int authorId;
 
     private String fullPostText;
     private String postComments;
@@ -32,12 +28,12 @@ public class Post {
         return photoUrl;
     }
 
-    public User getAuthor() {
-        return author;
+    public int getAuthorId() {
+        return authorId;
     }
 
-    public String getDataOfPublication() {
-        return dataOfPublication;
+    public String getDateOfPublication() {
+        return dateOfPublication;
     }
 
     public int getCountOfComments() {
@@ -68,15 +64,17 @@ public class Post {
         this.postComments = postComments;
     }
 
-    public Post(PostCategory postCategory, String title, String photoUrl, User author, String dataOfPublication, int countOfComments, String shortPostText, String postUrl) {
+    public Post(PostCategory postCategory, String title, String photoUrl, int authorId, String dateOfPublication, int countOfComments, String shortPostText, String postUrl, String fullPostText, String comments) {
         this.postCategory = postCategory;
         this.title = title;
         this.photoUrl = photoUrl;
-        this.author = author;
-        this.dataOfPublication = dataOfPublication;
+        this.authorId = authorId;
+        this.dateOfPublication = dateOfPublication;
         this.countOfComments = countOfComments;
         this.shortPostText = shortPostText;
         this.postUrl = postUrl;
+        this.fullPostText = fullPostText;
+        this.postComments = comments;
     }
 
     public Post() {

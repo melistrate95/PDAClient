@@ -55,10 +55,11 @@ public class PostAdapter extends ArrayAdapter<Post> {
         dataTextView.setText(post.getShortPostText());
 
         TextView dateOfPublicationView = (TextView) convertView.findViewById(R.id.date_of_publication);
-        dateOfPublicationView.setText(post.getDataOfPublication());
+        dateOfPublicationView.setText(post.getDateOfPublication());
 
-        TextView authorView = (TextView) convertView.findViewById(R.id.name_author);
-        authorView.setText(post.getAuthor().getUserLogin());
+        // TODO: Нету поля author, есть поле authorId, нужно что-то пофиксить
+        //TextView authorView = (TextView) convertView.findViewById(R.id.name_author);
+        //authorView.setText(post.getAuthor().getUserLogin());
 
         TextView countCommentView = (TextView) convertView.findViewById(R.id.count_comment);
         countCommentView.setText(post.getCountOfComments() + "");
