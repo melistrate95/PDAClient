@@ -14,13 +14,14 @@ import deadlion.com.pdaclient.R;
 import deadlion.com.pdaclient.model.Post;
 import deadlion.com.pdaclient.model.User;
 import deadlion.com.pdaclient.model.enum_model.PostCategory;
-import deadlion.com.pdaclient.view.adapter.PostAdapter;
+import deadlion.com.pdaclient.view.adapter.FullItemPostAdapter;
+import deadlion.com.pdaclient.view.adapter.ShortItemPostAdapter;
 
-public class ListFragment extends Fragment {
+public class ListAllFragment extends Fragment {
 
     SwipeRefreshLayout mSwipeRefreshLayout;
     ListView listView;
-    PostAdapter postAdapter;
+    ShortItemPostAdapter postAdapter;
     ArrayList<Post> posts = new ArrayList<Post>();
 
     @Override
@@ -33,7 +34,7 @@ public class ListFragment extends Fragment {
         posts.add(new Post(PostCategory.FAVORITE_CATEGORY, "xx", "xx", new User("xx", "ololo"), "xx", 10, "xx", "xx"));
         posts.add(new Post(PostCategory.FAVORITE_CATEGORY, "xx", "xx", new User("xx", "ololo"), "xx", 10, "xx", "xx"));
         posts.add(new Post(PostCategory.FAVORITE_CATEGORY, "xx", "xx", new User("xx", "ololo"), "xx", 10, "xx", "xx"));
-        postAdapter = new PostAdapter(getActivity(), posts);
+        postAdapter = new ShortItemPostAdapter(getActivity(), posts);
         postAdapter.setNotifyOnChange(true);
     }
 
