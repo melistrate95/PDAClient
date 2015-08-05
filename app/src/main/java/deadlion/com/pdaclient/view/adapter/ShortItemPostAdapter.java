@@ -33,25 +33,8 @@ public class ShortItemPostAdapter extends ItemPostAdapter {
 
         Post post = getItem(position);
 
-        View overflow = convertView.findViewById(R.id.post_overflow);
-        overflow.setOnClickListener(new OnPostOverflowSelectedListener(context, post));
-
-        TextView titleTextView = (TextView) convertView.findViewById(R.id.news_title);
-        titleTextView.setText(post.getTitle());
-
-        ImageView photoImageView = (ImageView)convertView.findViewById(R.id.news_photo);
-        Picasso.with(getContext())
-                .load(post.getPhotoUrl())
-                .into(photoImageView);
-
-        TextView dateOfPublicationView = (TextView) convertView.findViewById(R.id.date_of_publication);
-        dateOfPublicationView.setText(post.getDataOfPublication());
-
-        TextView authorView = (TextView) convertView.findViewById(R.id.name_author);
-        authorView.setText(post.getAuthor().getUserLogin());
-
-        TextView countCommentView = (TextView) convertView.findViewById(R.id.count_comment);
-        countCommentView.setText(post.getCountOfComments() + "");
+        postView.setCurrentView(convertView, post);
+        postView.buildShortPostItem();
 
         return convertView;
     }

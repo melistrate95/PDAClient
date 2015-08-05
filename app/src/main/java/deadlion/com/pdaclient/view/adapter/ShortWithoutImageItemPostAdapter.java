@@ -18,9 +18,9 @@ import deadlion.com.pdaclient.view.listener.OnPostOverflowSelectedListener;
 /**
  * Created by Михаил on 05.08.2015.
  */
-public class FullItemPostAdapter extends ItemPostAdapter {
+public class ShortWithoutImageItemPostAdapter extends ItemPostAdapter {
 
-    public FullItemPostAdapter(Context context, ArrayList<Post> posts) {
+    public ShortWithoutImageItemPostAdapter(Context context, ArrayList<Post> posts) {
         super(context, posts);
     }
 
@@ -28,13 +28,13 @@ public class FullItemPostAdapter extends ItemPostAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = layoutInflater.inflate(R.layout.full_item_post, null);
+            convertView = layoutInflater.inflate(R.layout.short_item_without_image_post, null);
         }
 
         Post post = getItem(position);
 
         postView.setCurrentView(convertView, post);
-        postView.buildFullPostItem();
+        postView.buildShortWithoutImagePostItem();
 
         return convertView;
     }
