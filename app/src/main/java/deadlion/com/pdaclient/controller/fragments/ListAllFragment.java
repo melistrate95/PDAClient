@@ -36,7 +36,7 @@ public class ListAllFragment extends Fragment {
         posts.add(new Post(PostCategory.FAVORITE_CATEGORY, "xx", "xx", new User("xx", "ololo"), "xx", 10, "xx", "xx"));
         posts.add(new Post(PostCategory.FAVORITE_CATEGORY, "xx", "xx", new User("xx", "ololo"), "xx", 10, "xx", "xx"));
         posts.add(new Post(PostCategory.FAVORITE_CATEGORY, "xx", "xx", new User("xx", "ololo"), "xx", 10, "xx", "xx"));
-        postAdapter = new ShortWithoutImageItemPostAdapter(getActivity(), posts);
+        postAdapter = new FullItemPostAdapter(getActivity(), posts);
         postAdapter.setNotifyOnChange(true);
     }
 
