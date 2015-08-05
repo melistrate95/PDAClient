@@ -20,7 +20,7 @@ public class ListAllFragment extends Fragment {
 
     SwipeRefreshLayout mSwipeRefreshLayout;
     ListView listView;
-    FullWithoutImageItemPostAdapter postAdapter;
+    ItemPostAdapter postAdapter;
     ArrayList<Post> posts = new ArrayList<Post>();
 
     @Override
@@ -36,7 +36,7 @@ public class ListAllFragment extends Fragment {
         posts.add(new Post(PostCategory.FAVORITE_CATEGORY, "xx", "xx", new User("xx", "ololo"), "xx", 10, "xx", "xx"));
         posts.add(new Post(PostCategory.FAVORITE_CATEGORY, "xx", "xx", new User("xx", "ololo"), "xx", 10, "xx", "xx"));
         posts.add(new Post(PostCategory.FAVORITE_CATEGORY, "xx", "xx", new User("xx", "ololo"), "xx", 10, "xx", "xx"));
-        postAdapter = new FullWithoutImageItemPostAdapter(getActivity(), posts);
+        postAdapter = new ShortWithoutImageItemPostAdapter(getActivity(), posts);
         postAdapter.setNotifyOnChange(true);
     }
 

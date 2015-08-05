@@ -29,12 +29,17 @@ public class ShortWithoutImageItemPostAdapter extends ItemPostAdapter {
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.short_item_without_image_post, null);
+
+            viewHolder = new ViewHolder();
+            viewHolder.saveShortWithoutImageData(convertView);
+        }
+        else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
         Post post = getItem(position);
 
-        postView.setCurrentView(convertView, post);
-        postView.buildShortWithoutImagePostItem();
+        viewHolder.buildShortWithoutImagePost(context, post);
 
         return convertView;
     }

@@ -26,15 +26,21 @@ public class ShortItemPostAdapter extends ItemPostAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.short_item_post, null);
+
+            viewHolder = new ViewHolder();
+            viewHolder.saveShortData(convertView);
+        }
+        else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
         Post post = getItem(position);
 
-        postView.setCurrentView(convertView, post);
-        postView.buildShortPostItem();
+        viewHolder.buildShortPost(context, post);
 
         return convertView;
     }

@@ -26,15 +26,21 @@ public class FullWithoutImageItemPostAdapter extends ItemPostAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.full_item_without_image_post, null);
+
+            viewHolder = new ViewHolder();
+            viewHolder.saveFullWithoutImageData(convertView);
+        }
+        else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
         Post post = getItem(position);
 
-        postView.setCurrentView(convertView, post);
-        postView.buildFullWithoutImagePostItem();
+        viewHolder.buildFullWithoutImagePost(context, post);
 
         return convertView;
     }

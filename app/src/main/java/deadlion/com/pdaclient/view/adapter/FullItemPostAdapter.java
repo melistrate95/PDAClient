@@ -26,15 +26,21 @@ public class FullItemPostAdapter extends ItemPostAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.full_item_post, null);
+
+            viewHolder = new ViewHolder();
+            viewHolder.saveFullData(convertView);
+        }
+        else {
+            viewHolder = (ViewHolder) convertView.getTag();
         }
 
         Post post = getItem(position);
 
-        postView.setCurrentView(convertView, post);
-        postView.buildFullPostItem();
+        viewHolder.buildFullPost(context, post);
 
         return convertView;
     }
