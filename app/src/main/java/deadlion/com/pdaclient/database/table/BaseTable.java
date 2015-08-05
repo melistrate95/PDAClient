@@ -7,23 +7,19 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
-import deadlion.com.pdaclient.database.DBHelper;
+import deadlion.com.pdaclient.database.DbHelper;
 
 public abstract class BaseTable<TModel> {
 
     protected final String LOG_TAG = "Db_table_logs";
-    protected DBHelper dbHelper;
 
-    public BaseTable(DBHelper dbHelper) {
+    protected DbHelper dbHelper;
+    protected final String tableName;
+
+    public BaseTable(DbHelper dbHelper, String tableName) {
         this.dbHelper = dbHelper;
+        this.tableName = tableName;
     }
-
-    /**
-     * Переопределение данного метода обязано возвращать название таблицы.
-     * @return Название таблицы
-     */
-    protected abstract String getTableName();
-
 
     /**
      * Переопределение данного метода обязано возвращать строку запроса на создание таблицы
@@ -131,7 +127,7 @@ public abstract class BaseTable<TModel> {
 
         try {
             db = dbHelper.getReadableDatabase();
-            cursor = db.query(getTableName(), null, selection, selectionArgs, groupBy, having, orderBy, limit);
+            cursor = db.query(tableName, null, selection, selectionArgs, groupBy, having, orderBy, limit);
 
             if (cursor.moveToFirst()) {
                 do {
@@ -162,7 +158,7 @@ public abstract class BaseTable<TModel> {
         try {
             db = dbHelper.getWritableDatabase();
             ContentValues values = getContentValues(model);
-            result = db.insert(getTableName(), null, values);
+            result = db.insert(tableName, null, values);
         }
         catch (Exception ex) {
             Log.d(LOG_TAG, ex.getLocalizedMessage());
@@ -184,7 +180,7 @@ public abstract class BaseTable<TModel> {
         try {
             db = dbHelper.getWritableDatabase();
             ContentValues values = getContentValues(model);
-            result = db.update(getTableName(), values, whereClause, whereArgs);
+            result = db.update(tableName, values, whereClause, whereArgs);
         }
         catch (Exception ex) {
             Log.d(LOG_TAG, ex.getLocalizedMessage());
@@ -205,7 +201,7 @@ public abstract class BaseTable<TModel> {
 
         try {
             db = dbHelper.getWritableDatabase();
-            result = db.update(getTableName(), values, whereClause, whereArgs);
+            result = db.update(tableName, values, whereClause, whereArgs);
         }
         catch (Exception ex) {
             Log.d(LOG_TAG, ex.getLocalizedMessage());
@@ -226,7 +222,7 @@ public abstract class BaseTable<TModel> {
 
         try {
             db = dbHelper.getWritableDatabase();
-            result = db.delete(getTableName(), whereClause, whereArgs);
+            result = db.delete(tableName, whereClause, whereArgs);
         }
         catch (Exception ex) {
             Log.d(LOG_TAG, ex.getLocalizedMessage());
@@ -240,6 +236,4 @@ public abstract class BaseTable<TModel> {
 
         return result;
     }
-
-
 }

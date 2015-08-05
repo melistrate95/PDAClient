@@ -5,16 +5,7 @@ public class Author {
     private String memberId;
     private int lastLoadedPostId;
 
-    // TODO: Необходимо написать конструктор
-    public Author(String authorUrl, Post lastLoadedPost) {
-
-    }
-
-    public Author(String name, String memberId, int lastLoadedPostId) {
-        this.name = name;
-        this.memberId = memberId;
-        this.lastLoadedPostId = lastLoadedPostId;
-    }
+    /************************************************************/
 
     public String getName() {
         return name;
@@ -26,6 +17,25 @@ public class Author {
 
     public int getLastLoadedPostId() {
         return lastLoadedPostId;
+    }
+
+    /************************************************************/
+
+    public void setLastLoadedPostId(int lastLoadedPostId) {
+        this.lastLoadedPostId = lastLoadedPostId;
+    }
+
+    /************************************************************/
+
+    // TODO: Необходимо написать конструктор
+    public Author(String authorUrl, Post lastLoadedPost) {
+
+    }
+
+    public Author(String name, String memberId, int lastLoadedPostId) {
+        this.name = name;
+        this.memberId = memberId;
+        this.lastLoadedPostId = lastLoadedPostId;
     }
 }
 
