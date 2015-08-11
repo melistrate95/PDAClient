@@ -50,4 +50,9 @@ public class User {
         this.memberId = memberId;
         this.avatarUrl = avatarUrl;
     }
+
+    public User(String memberId, String login) {
+        this.memberId = memberId;
+        this.login = login;
+    }
 }

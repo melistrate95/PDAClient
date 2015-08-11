@@ -4,14 +4,12 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import deadlion.com.pdaclient.database.table.AuthorTable;
 import deadlion.com.pdaclient.database.table.PostTable;
 
 public class DbHelper extends SQLiteOpenHelper {
 
     private SQLiteDatabase db;
     private PostTable postTable;
-    private AuthorTable authorTable;
 
     public DbHelper(Context context) {
         super(context, "PostDB", null, 1);
@@ -20,9 +18,6 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         postTable = new PostTable(this);
-        authorTable = new AuthorTable(this);
-
-        authorTable.createTable();
         postTable.createTable();
     }
 

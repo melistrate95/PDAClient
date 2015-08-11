@@ -5,13 +5,17 @@ import android.database.Cursor;
 
 import deadlion.com.pdaclient.database.DbHelper;
 import deadlion.com.pdaclient.model.Post;
+import deadlion.com.pdaclient.model.complex_type.Author;
 import deadlion.com.pdaclient.model.enum_model.PostCategory;
 
 public class PostTable extends BaseTable<Post> {
 
     public final String COLUMN_CATEGORY = "CATEGORY";
     public final String COLUMN_PHOTO_URL = "PHOTO_URL";
-    public final String COLUMN_AUTHOR_ID = "AUTHOR_ID";
+
+    public final String COLUMN_AUTHOR_NICKNAME = "AUTHOR_NICKNAME";
+    public final String COLUMN_AUTHOR_MEMBER_ID = "AUTHOR_MEMBER_ID";
+
     public final String COLUMN_DATE_OF_PUBLICATION = "DATE_OF_PUBLICATION";
     public final String COLUMN_COUNT_OF_COMMENTS = "COUNT_OF_COMMENTS";
     public final String COLUMN_URL = "URL";
@@ -38,7 +42,8 @@ public class PostTable extends BaseTable<Post> {
                 + COLUMN_CATEGORY + "TEXT, "
                 + COLUMN_TITLE + "TEXT, "
                 + COLUMN_PHOTO_URL + "TEXT, "
-                + COLUMN_AUTHOR_ID + "INTEGER, "
+                + COLUMN_AUTHOR_NICKNAME + "TEXT, "
+                + COLUMN_AUTHOR_MEMBER_ID + "TEXT, "
                 + COLUMN_DATE_OF_PUBLICATION + "TEXT, "
                 + COLUMN_COUNT_OF_COMMENTS + "INTEGER, "
                 + COLUMN_DESCRIPTION + "TEXT, "
@@ -61,7 +66,10 @@ public class PostTable extends BaseTable<Post> {
                 getStringByColumnName(cursor, COLUMN_PHOTO_URL),
                 getStringByColumnName(cursor, COLUMN_DATE_OF_PUBLICATION),
                 getIntByColumnName(cursor, COLUMN_COUNT_OF_COMMENTS),
-                getIntByColumnName(cursor, COLUMN_AUTHOR_ID)
+                new Author(
+                        getStringByColumnName(cursor, COLUMN_AUTHOR_NICKNAME),
+                        getStringByColumnName(cursor, COLUMN_AUTHOR_MEMBER_ID)
+                )
         );
     }
 
@@ -71,7 +79,8 @@ public class PostTable extends BaseTable<Post> {
         values.put(COLUMN_CATEGORY, post.getCategory().toString());
         values.put(COLUMN_TITLE, post.getTitle());
         values.put(COLUMN_PHOTO_URL, post.getPhotoUrl());
-        values.put(COLUMN_AUTHOR_ID, post.getAuthorId());
+        values.put(COLUMN_AUTHOR_NICKNAME, post.getAuthor().getName());
+        values.put(COLUMN_AUTHOR_MEMBER_ID, post.getAuthor().getMemberId());
         values.put(COLUMN_DATE_OF_PUBLICATION, post.getDateOfPublication());
         values.put(COLUMN_COUNT_OF_COMMENTS, post.getCountOfComments());
         values.put(COLUMN_DESCRIPTION, post.getDescription());

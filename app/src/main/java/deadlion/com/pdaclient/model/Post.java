@@ -1,5 +1,6 @@
 package deadlion.com.pdaclient.model;
 
+import deadlion.com.pdaclient.model.complex_type.Author;
 import deadlion.com.pdaclient.model.enum_model.PostCategory;
 
 public class Post {
@@ -8,7 +9,7 @@ public class Post {
     private String photoUrl;
     private String dateOfPublication;
     private int countOfComments;
-    private int authorId;
+    private Author author;
 
     private String title;
     private String description;
@@ -37,8 +38,8 @@ public class Post {
         return countOfComments;
     }
 
-    public int getAuthorId() {
-        return authorId;
+    public Author getAuthor() {
+        return author;
     }
 
     public String getTitle() {
@@ -69,24 +70,24 @@ public class Post {
 
     /************************************************************/
 
-    public Post(String title, String description, PostCategory category, String url, String photoUrl, String dateOfPublication, int countOfComments, int authorId) {
+    public Post(String title, String description, PostCategory category, String url, String photoUrl, String dateOfPublication, int countOfComments, Author author) {
         this.category = category;
         this.url = url;
         this.photoUrl = photoUrl;
         this.dateOfPublication = dateOfPublication;
         this.countOfComments = countOfComments;
-        this.authorId = authorId;
+        this.author = author;
         this.title = title;
         this.description = description;
     }
 
-    public Post(String title, String description, String text, String comments, PostCategory category, String url, String photoUrl, String dateOfPublication, int countOfComments, int authorId) {
+    public Post(String title, String description, String text, String comments, PostCategory category, String url, String photoUrl, String dateOfPublication, int countOfComments, Author author) {
         this.category = category;
         this.url = url;
         this.photoUrl = photoUrl;
         this.dateOfPublication = dateOfPublication;
         this.countOfComments = countOfComments;
-        this.authorId = authorId;
+        this.author = author;
         this.title = title;
         this.description = description;
         this.text = text;

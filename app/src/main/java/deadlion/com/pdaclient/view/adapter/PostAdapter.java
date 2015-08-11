@@ -15,9 +15,6 @@ import java.util.ArrayList;
 import deadlion.com.pdaclient.R;
 import deadlion.com.pdaclient.model.Post;
 
-/**
- * Created by Mike on 01.08.2015.
- */
 public class PostAdapter extends ArrayAdapter<Post> {
 
     Context context;
@@ -52,7 +49,7 @@ public class PostAdapter extends ArrayAdapter<Post> {
                 .into(photoImageView);
 
         TextView dataTextView = (TextView) convertView.findViewById(R.id.news_data);
-        dataTextView.setText(post.getShortPostText());
+        dataTextView.setText(post.getDescription());
 
         TextView dateOfPublicationView = (TextView) convertView.findViewById(R.id.date_of_publication);
         dateOfPublicationView.setText(post.getDateOfPublication());

@@ -81,6 +81,10 @@ public abstract class BaseTable<TModel> {
         return getBy("ID=?", new String[]{String.valueOf(id)}, null, null, null, null).get(0);
     }
 
+    public ArrayList<TModel> getAll() {
+        return getBy(null, null, null, null, null, null);
+    }
+
     public long insertItem(TModel model) {
         return insert(model);
     }
@@ -136,6 +140,7 @@ public abstract class BaseTable<TModel> {
             }
         }
         catch (Exception ex) {
+            items = null;
             Log.d(LOG_TAG, ex.getLocalizedMessage());
         }
         finally {
