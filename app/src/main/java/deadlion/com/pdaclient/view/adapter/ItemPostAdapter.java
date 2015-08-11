@@ -91,18 +91,18 @@ public abstract class ItemPostAdapter extends ArrayAdapter<Post> {
             Picasso.with(context)
                     .load(post.getPhotoUrl())
                     .into(photoImageView);
-            dataTextView.setText(post.getShortPostText());
-            dateOfPublicationView.setText(post.getDataOfPublication());
-            authorView.setText(post.getAuthor().getUserLogin());
+            dataTextView.setText(post.getDescription());
+            dateOfPublicationView.setText(post.getDateOfPublication());
+            authorView.setText(post.getAuthor().getName());
             countCommentView.setText(post.getCountOfComments() + "");
         }
 
         public void buildFullWithoutImagePost(Context context, Post post) {
             overflowButton.setOnClickListener(new OnPostOverflowSelectedListener(context, post));
             titleTextView.setText(post.getTitle());
-            dataTextView.setText(post.getShortPostText());
-            dateOfPublicationView.setText(post.getDataOfPublication());
-            authorView.setText(post.getAuthor().getUserLogin());
+            dataTextView.setText(post.getDescription());
+            dateOfPublicationView.setText(post.getDateOfPublication());
+            authorView.setText(post.getAuthor().getName());
             countCommentView.setText(post.getCountOfComments() + "");
         }
 
@@ -112,16 +112,16 @@ public abstract class ItemPostAdapter extends ArrayAdapter<Post> {
             Picasso.with(context)
                     .load(post.getPhotoUrl())
                     .into(photoImageView);
-            dateOfPublicationView.setText(post.getDataOfPublication());
-            authorView.setText(post.getAuthor().getUserLogin());
+            dateOfPublicationView.setText(post.getDateOfPublication());
+            authorView.setText(post.getAuthor().getName());
             countCommentView.setText(post.getCountOfComments() + "");
         }
 
         public void buildShortWithoutImagePost(Context context, Post post) {
             overflowButton.setOnClickListener(new OnPostOverflowSelectedListener(context, post));
             titleTextView.setText(post.getTitle());
-            dateOfPublicationView.setText(post.getDataOfPublication());
-            authorView.setText(post.getAuthor().getUserLogin());
+            dateOfPublicationView.setText(post.getDateOfPublication());
+            authorView.setText(post.getAuthor().getName());
             countCommentView.setText(post.getCountOfComments() + "");
         }
     }

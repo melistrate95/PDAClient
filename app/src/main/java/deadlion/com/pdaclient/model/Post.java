@@ -1,85 +1,96 @@
 package deadlion.com.pdaclient.model;
 
-import java.util.Date;
-
+import deadlion.com.pdaclient.model.complex_type.Author;
 import deadlion.com.pdaclient.model.enum_model.PostCategory;
 
-/**
- * Created by Mike on 27.07.2015.
- */
 public class Post {
-    private PostCategory postCategory;
-    private String title;
+    private PostCategory category;
+    private String url;
     private String photoUrl;
-    private User author;
-    private String dataOfPublication;
+    private String dateOfPublication;
     private int countOfComments;
-    private String shortPostText;
-    private String postUrl;
+    private Author author;
 
-    private String fullPostText;
-    private String postComments;
+    private String title;
+    private String description;
+    private String text;
+    private String comments;
 
-    public PostCategory getPostCategory() {
-        return postCategory;
+    /************************************************************/
+
+    public PostCategory getCategory() {
+        return category;
     }
 
-    public String getTitle() {
-        return title;
+    public String getUrl() {
+        return url;
     }
 
     public String getPhotoUrl() {
         return photoUrl;
     }
 
-    public User getAuthor() {
-        return author;
-    }
-
-    public String getDataOfPublication() {
-        return dataOfPublication;
+    public String getDateOfPublication() {
+        return dateOfPublication;
     }
 
     public int getCountOfComments() {
         return countOfComments;
     }
 
-    public String getShortPostText() {
-        return shortPostText;
+    public Author getAuthor() {
+        return author;
     }
 
-    public String getPostUrl() {
-        return postUrl;
+    public String getTitle() {
+        return title;
     }
 
-    public String getFullPostText() {
-        return fullPostText;
+    public String getDescription() {
+        return description;
     }
 
-    public String getPostComments() {
-        return postComments;
+    public String getText() {
+        return text;
     }
 
-    public void setFullPostText(String fullPostText) {
-        this.fullPostText = fullPostText;
+    public String getComments() {
+        return comments;
     }
 
-    public void setPostComments(String postComments) {
-        this.postComments = postComments;
+    /************************************************************/
+
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 
-    public Post(PostCategory postCategory, String title, String photoUrl, User author, String dataOfPublication, int countOfComments, String shortPostText, String postUrl) {
-        this.postCategory = postCategory;
-        this.title = title;
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    /************************************************************/
+
+    public Post(String title, String description, PostCategory category, String url, String photoUrl, String dateOfPublication, int countOfComments, Author author) {
+        this.category = category;
+        this.url = url;
         this.photoUrl = photoUrl;
-        this.author = author;
-        this.dataOfPublication = dataOfPublication;
+        this.dateOfPublication = dateOfPublication;
         this.countOfComments = countOfComments;
-        this.shortPostText = shortPostText;
-        this.postUrl = postUrl;
+        this.author = author;
+        this.title = title;
+        this.description = description;
     }
 
-    public Post() {
-
+    public Post(String title, String description, String text, String comments, PostCategory category, String url, String photoUrl, String dateOfPublication, int countOfComments, Author author) {
+        this.category = category;
+        this.url = url;
+        this.photoUrl = photoUrl;
+        this.dateOfPublication = dateOfPublication;
+        this.countOfComments = countOfComments;
+        this.author = author;
+        this.title = title;
+        this.description = description;
+        this.text = text;
+        this.comments = comments;
     }
 }
