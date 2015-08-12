@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:id="@+id/all_item">
+        <item
+            android:id="@+id/action_offline"
+            android:title="@string/item_offline"
+            android:icon="@drawable/ic_offline"
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/action_online"
+            android:title="@string/item_online"
+            android:icon="@drawable/ic_offline"
+            app:showAsAction="ifRoom" />
+        <item
+            android:id="@+id/action_search"
+            android:title="@string/item_search"
+            android:icon="@drawable/ic_search"
+            app:showAsAction="always" />
+        <item
+            android:id="@+id/action_post_setting"
+            android:title="@string/item_post_view"
+            app:showAsAction="never" />
+    </group>
+</menu>

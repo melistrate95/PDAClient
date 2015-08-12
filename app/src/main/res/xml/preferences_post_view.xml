@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.afollestad.materialdialogs.prefs.MaterialListPreference
+        android:title="Загружать изображения"
+        android:summary=""
+        android:key="loadImagePreference"
+        android:defaultValue="0"
+        android:entries="@array/listLoadImageArray"
+        android:entryValues="@array/listLoadImageValues" />
+    <com.afollestad.materialdialogs.prefs.MaterialListPreference
+        android:title="Вид списка"
+        android:summary=""
+        android:key="postViewPreference"
+        android:defaultValue="0"
+        android:entries="@array/listPostViewArray"
+        android:entryValues="@array/listPostViewValues" />
+</PreferenceScreen>

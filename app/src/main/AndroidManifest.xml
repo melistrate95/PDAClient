@@ -6,8 +6,9 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launch"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".controller.activity.MainActivity">
+        android:theme="@style/DarkTheme" >
+        <activity android:name=".controller.activity.MainActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -15,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".controller.activity.SettingActivity" />
+        <activity android:name=".controller.activity.SettingPostActivity" />
         <activity android:name=".controller.activity.FullPostActivity" />
     </application>
 

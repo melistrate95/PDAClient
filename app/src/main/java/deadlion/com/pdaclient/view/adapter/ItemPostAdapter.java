@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import deadlion.com.pdaclient.R;
+import deadlion.com.pdaclient.controller.provider.SettingProvider;
 import deadlion.com.pdaclient.model.Post;
 import deadlion.com.pdaclient.view.listener.OnPostOverflowSelectedListener;
 
@@ -21,7 +22,7 @@ import deadlion.com.pdaclient.view.listener.OnPostOverflowSelectedListener;
  */
 public abstract class ItemPostAdapter extends ArrayAdapter<Post> {
 
-    Context context;
+    static Context context;
     ArrayList<Post> posts;
     ViewHolder viewHolder;
 
@@ -45,11 +46,17 @@ public abstract class ItemPostAdapter extends ArrayAdapter<Post> {
         private TextView authorView;
         private TextView countCommentView;
 
+        private void saveShortText(View convertView) {
+            SettingProvider settingProvider = new SettingProvider(context);
+            dataTextView = (TextView) convertView.findViewById(R.id.news_data);
+            settingProvider.setFont(dataTextView);
+        }
+
         public void saveFullData(View convertView) {
             overflowButton = convertView.findViewById(R.id.post_overflow);
             titleTextView = (TextView) convertView.findViewById(R.id.news_title);
             photoImageView = (ImageView)convertView.findViewById(R.id.news_photo);
-            dataTextView = (TextView) convertView.findViewById(R.id.news_data);
+            saveShortText(convertView);
             dateOfPublicationView = (TextView) convertView.findViewById(R.id.date_of_publication);
             authorView = (TextView) convertView.findViewById(R.id.name_author);
             countCommentView = (TextView) convertView.findViewById(R.id.count_comment);
@@ -59,7 +66,7 @@ public abstract class ItemPostAdapter extends ArrayAdapter<Post> {
         public void saveFullWithoutImageData(View convertView) {
             overflowButton = convertView.findViewById(R.id.post_overflow);
             titleTextView = (TextView) convertView.findViewById(R.id.news_title);
-            dataTextView = (TextView) convertView.findViewById(R.id.news_data);
+            saveShortText(convertView);
             dateOfPublicationView = (TextView) convertView.findViewById(R.id.date_of_publication);
             authorView = (TextView) convertView.findViewById(R.id.name_author);
             countCommentView = (TextView) convertView.findViewById(R.id.count_comment);

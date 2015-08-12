@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="Учетная запись">
-        <Preference
-            android:title="Выйти"
-            android:summary=""
-            android:key="exitPreference" >
-        </Preference>
-    </PreferenceCategory>
     <PreferenceCategory android:title="Персонализация">
-        <Preference
+        <com.afollestad.materialdialogs.prefs.MaterialListPreference
             android:title="Тема"
             android:summary=""
-            android:key="themePreference" >
-        </Preference>
-        <Preference
+            android:key="themePreference"
+            android:defaultValue="0"
+            android:entries="@array/listThemeArray"
+            android:entryValues="@array/listThemeValues" />
+        <CheckBoxPreference
             android:title="Шрифт постов"
+            android:summary="Увеличить шрифт постов"
+            android:key="postFontPreference" />
+        <PreferenceScreen
+            android:fragment="deadlion.com.pdaclient.controller.fragments.SettingPostFragment"
+            android:title="Вид постов"
             android:summary=""
-            android:key="postFontPreference" >
-        </Preference>
+            android:key="postAdapterPreference">
+        </PreferenceScreen>
     </PreferenceCategory>
     <PreferenceCategory android:title="Прочее">
         <Preference
             android:title="О программе"
             android:summary=""
-            android:key="aboutPreference" >
-        </Preference>
-</PreferenceCategory>
+            android:key="aboutPreference" />
+    </PreferenceCategory>
 </PreferenceScreen>

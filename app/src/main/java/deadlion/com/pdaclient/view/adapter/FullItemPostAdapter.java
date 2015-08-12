@@ -1,6 +1,7 @@
 package deadlion.com.pdaclient.view.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +31,6 @@ public class FullItemPostAdapter extends ItemPostAdapter {
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = layoutInflater.inflate(R.layout.full_item_post, null);
-
             viewHolder = new ViewHolder();
             viewHolder.saveFullData(convertView);
         }

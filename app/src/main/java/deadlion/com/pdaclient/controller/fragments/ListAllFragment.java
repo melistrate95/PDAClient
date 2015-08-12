@@ -11,34 +11,30 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import deadlion.com.pdaclient.R;
+import deadlion.com.pdaclient.controller.provider.SettingProvider;
 import deadlion.com.pdaclient.model.Post;
 import deadlion.com.pdaclient.model.complex_type.Author;
 import deadlion.com.pdaclient.model.enum_model.PostCategory;
-import deadlion.com.pdaclient.view.adapter.FullItemPostAdapter;
-import deadlion.com.pdaclient.view.adapter.ItemPostAdapter;
+import deadlion.com.pdaclient.view.adapter.*;
 
 public class ListAllFragment extends Fragment {
 
     SwipeRefreshLayout mSwipeRefreshLayout;
     ListView listView;
-    ItemPostAdapter postAdapter;
     ArrayList<Post> posts = new ArrayList<>();
+    SettingProvider settingProvider;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-
+        settingProvider = new SettingProvider(getActivity());
         posts.add(new Post("xx", "xx", PostCategory.ARTICLE_CATEGORY, "xx", "xx", "xx", 2, new Author("xx", "xx")));
         posts.add(new Post("xx", "xx", PostCategory.ARTICLE_CATEGORY, "xx", "xx", "xx", 2, new Author("xx", "xx")));
         posts.add(new Post("xx", "xx", PostCategory.ARTICLE_CATEGORY, "xx", "xx", "xx", 2, new Author("xx", "xx")));
         posts.add(new Post("xx", "xx", PostCategory.ARTICLE_CATEGORY, "xx", "xx", "xx", 2, new Author("xx", "xx")));
         posts.add(new Post("xx", "xx", PostCategory.ARTICLE_CATEGORY, "xx", "xx", "xx", 2, new Author("xx", "xx")));
         posts.add(new Post("xx", "xx", PostCategory.ARTICLE_CATEGORY, "xx", "xx", "xx", 2, new Author("xx", "xx")));
-
-
-        postAdapter = new FullItemPostAdapter(getActivity(), posts);
-        postAdapter.setNotifyOnChange(true);
     }
 
     @Override
@@ -46,7 +42,7 @@ public class ListAllFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         listView = (ListView) view.findViewById(R.id.posts);
         listView.setDivider(getResources().getDrawable(android.R.color.transparent));
-        listView.setAdapter(postAdapter);
+        settingProvider.setPostView(listView, posts);
         return view;
     }
 }

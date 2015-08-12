@@ -1,5 +1,65 @@
 <resources>
+
     <string name="app_name">PDAClient</string>
 
     <string name="no_connected">No connected</string>
+    <string name="item_online">Профиль</string>
+    <string name="item_offline">Войти</string>
+    <string name="item_search">Поиск</string>
+    <string name="item_post_view">Вид постов</string>
+
+    <!-- Подразделы -->
+    <string-array name="newsArray">
+        <item>Новости</item>
+        <item>Статьи</item>
+        <item>Обзоры</item>
+        <item>Программы " "</item>
+        <item>Игры</item>
+    </string-array>
+
+    <string-array name="listThemeArray">
+        <item>Light</item>
+        <item>Dark</item>
+    </string-array>
+
+    <string-array name="listThemeValues">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <string-array name="listLoadImageArray">
+        <item>Всегда</item>
+        <item>Только по Wi-fi</item>
+        <item>Никода</item>
+    </string-array>
+
+    <string-array name="listLoadImageValues">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="listPostViewArray">
+        <item>Полный</item>
+        <item>Сокращенный</item>
+    </string-array>
+
+    <string-array name="listPostViewValues">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
+    <!-- Navigation Bar -->
+
+    <!-- Section -->
+    <string name="item_section_post">Посты</string>
+    <string name="item_section_forum">Форум</string>
+    <string name="item_section_other">Другое</string>
+
+    <string name="item_news">Новости</string>
+    <string name="item_favorite">Избранное</string>
+    <string name="item_forum">Форум</string>
+    <string name="item_devdb">DevDB</string>
+    <string name="item_setting">Настройки</string>
+
 </resources>
