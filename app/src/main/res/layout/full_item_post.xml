@@ -11,6 +11,7 @@
     card_view:cardElevation="5dp">
     <LinearLayout
         android:orientation="vertical"
+        style="?attr/layoutBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
@@ -57,8 +58,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            style="?attr/textView"
             android:id="@+id/news_data"
-            android:textColor="@android:color/black"
             android:textSize="15dp"
             android:paddingLeft="5dp"
             android:paddingBottom="10dp"
@@ -72,26 +73,26 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="?attr/textView"
                 android:id="@+id/date_of_publication"
                 android:layout_weight="3"
-                android:layout_margin="10dp"
-                android:textColor="@android:color/black" />
+                android:layout_margin="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="?attr/textView"
                 android:id="@+id/name_author"
                 android:layout_weight="3"
-                android:layout_margin="10dp"
-                android:textColor="@android:color/black" />
+                android:layout_margin="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="?attr/textView"
                 android:id="@+id/count_comment"
                 android:layout_weight="1"
                 android:layout_margin="10dp"
-                android:textColor="@android:color/black"
                 android:textStyle="bold"
                 android:gravity="right" />
         </LinearLayout>

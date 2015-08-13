@@ -32,6 +32,11 @@ public class MainActivity extends ToolbarActivity {
         ToolbarMainProvider toolbarProvider = new ToolbarMainProvider(this, toolbar);
         navigationDrawerProvider = new NavigationDrawerProvider(toolbarProvider, this);
         navigationDrawerProvider.initializeNavigationDrawer();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         navigationDrawerProvider.setDrawerItemSelection(lastNavDrawerIdentifier);
     }
 

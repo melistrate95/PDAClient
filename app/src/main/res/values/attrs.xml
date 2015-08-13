@@ -5,4 +5,8 @@
         <attr name="tint" format="reference|color" />
     </declare-styleable>
 
+    <attr name="textView" format="reference" />
+    <attr name="layoutBackground" format="reference" />
+    <attr name="listViewBackground" format="reference" />
+
 </resources>

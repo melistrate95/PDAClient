@@ -24,7 +24,6 @@
             android:text="4pda для Android"
             android:id="@+id/textView"
             android:layout_gravity="center_horizontal"
-            android:textColor="@android:color/black"
             android:textStyle="bold" />
 
         <TextView
@@ -33,7 +32,6 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Версия 0.1.0"
             android:id="@+id/textView2"
-            android:textColor="@android:color/black"
             android:textStyle="normal"
             android:layout_marginBottom="20dp"
             android:layout_gravity="center_horizontal" />
@@ -45,7 +43,6 @@
             android:text="Пишите свои рекомендации и замечания по адресу:"
             android:id="@+id/textView3"
             android:layout_gravity="center_horizontal"
-            android:textColor="@android:color/black"
             android:textStyle="normal"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -58,7 +55,6 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="deadlionstudio@gmail.com"
             android:id="@+id/textView4"
-            android:textColor="@android:color/black"
             android:textStyle="normal"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -72,7 +68,6 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Copyright © 2015 Deadlion Std."
             android:id="@+id/textView5"
-            android:textColor="@android:color/black"
             android:textStyle="normal"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"

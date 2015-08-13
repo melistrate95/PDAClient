@@ -17,9 +17,15 @@
         <item name="material_drawer_selected">@color/material_drawer_selected</item>
         <item name="material_drawer_selected_text">@color/material_drawer_selected_text</item>
         <item name="material_drawer_header_selection_text">@color/material_drawer_header_selection_text</item>
+
+        <!-- TextView specific values -->
+        <item name="textView">@style/LightTextView</item>
+        <item name="layoutBackground">@style/LightLayout</item>
+        <item name="listViewBackground">@style/LightListView</item>
+
     </style>
 
-    <style name="DarkTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="DarkTheme" parent="Theme.AppCompat.NoActionBar">
 
         <!-- Toolbar specific values -->
         <item name="colorPrimary">#465c69</item>
@@ -37,11 +43,40 @@
         <item name="material_drawer_selected_text">@color/material_drawer_dark_selected_text</item>
         <item name="material_drawer_header_selection_text">@color/material_drawer_dark_header_selection_text</item>
 
+        <!-- TextView specific values -->
+        <item name="textView">@style/DarkTextView</item>
+        <item name="layoutBackground">@style/DarkLayout</item>
+        <item name="listViewBackground">@style/DarkListView</item>
+
     </style>
 
     <style name="ToolbarTitle" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">20sp</item>
         <item name="android:ellipsize">marquee</item>
+    </style>
+
+    <style name="DarkTextView">
+        <item name="android:textColor">#e5ebed</item>
+    </style>
+
+    <style name="LightTextView">
+        <item name="android:textColor">#202021</item>
+    </style>
+
+    <style name="DarkLayout">
+        <item name="android:background">#202021</item>
+    </style>
+
+    <style name="LightLayout">
+        <item name="android:background">#e5ebed</item>
+    </style>
+
+    <style name="DarkListView">
+        <item name="android:background">#4f4f50</item>
+    </style>
+
+    <style name="LightListView">
+        <item name="android:background">#e5ebed</item>
     </style>
 
 </resources>

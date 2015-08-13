@@ -58,22 +58,22 @@ public class NavigationDrawerProvider {
                         switch (identifier) {
                             case NavDrawerIdentifier.IDENTIFIER_POST:
                                 MainActivity.lastNavDrawerIdentifier = identifier;
-                                manager.beginTransaction().replace(R.id.container, new ListAllFragment()).commit();
+                                manager.beginTransaction().replace(R.id.container, new ListAllFragment(), "ListFragment").commit();
                                 break;
                             case NavDrawerIdentifier.IDENTIFIER_FAVORITE_POST:
                                 MainActivity.lastNavDrawerIdentifier = identifier;
-                                manager.beginTransaction().replace(R.id.container, new ListAllFragment()).commit();
+                                manager.beginTransaction().replace(R.id.container, new ListAllFragment(), "ListFragment").commit();
                                 break;
                             case NavDrawerIdentifier.IDENTIFIER_FORUM:
                                 MainActivity.lastNavDrawerIdentifier = identifier;
-                                manager.beginTransaction().replace(R.id.container, new ListAllFragment()).commit();
+                                manager.beginTransaction().replace(R.id.container, new ListAllFragment(), "ListFragment").commit();
                                 break;
                             case NavDrawerIdentifier.IDENTIFIER_FAVORITE_TOPIC:
                                 MainActivity.lastNavDrawerIdentifier = identifier;
                                 break;
                             case NavDrawerIdentifier.IDENTIFIER_DEVDB:
                                 MainActivity.lastNavDrawerIdentifier = identifier;
-                                manager.beginTransaction().replace(R.id.container, new ListAllFragment()).commit();
+                                manager.beginTransaction().replace(R.id.container, new ListAllFragment(), "ListFragment").commit();
                                 break;
                             case NavDrawerIdentifier.IDENTIFIER_SETTING:
                                 Intent intent = new Intent(activity, SettingActivity.class);

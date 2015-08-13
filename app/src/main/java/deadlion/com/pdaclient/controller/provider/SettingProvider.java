@@ -1,5 +1,6 @@
 package deadlion.com.pdaclient.controller.provider;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +14,8 @@ import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 import java.util.ArrayList;
 
 import deadlion.com.pdaclient.R;
+import deadlion.com.pdaclient.controller.activity.MainActivity;
+import deadlion.com.pdaclient.controller.activity.SettingActivity;
 import deadlion.com.pdaclient.model.Post;
 import deadlion.com.pdaclient.view.adapter.FullItemPostAdapter;
 import deadlion.com.pdaclient.view.adapter.FullWithoutImageItemPostAdapter;
@@ -46,6 +49,9 @@ public class SettingProvider {
                 SharedPreferences.Editor edit = themeDataPreference.edit();
                 edit.putInt("THEME_ID", Integer.parseInt((String) newValue));
                 edit.apply();
+                Intent i = new Intent(context.getApplicationContext(), MainActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                context.startActivity(i);
                 return true;
             }
         });
