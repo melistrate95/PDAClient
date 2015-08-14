@@ -15,7 +15,7 @@ import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 
 import deadlion.com.pdaclient.R;
 import deadlion.com.pdaclient.controller.activity.SettingPostActivity;
-import deadlion.com.pdaclient.controller.provider.SettingProvider;
+import deadlion.com.pdaclient.controller.provider.setting.SettingProvider;
 
 /**
  * Created by Mike on 02.08.2015.

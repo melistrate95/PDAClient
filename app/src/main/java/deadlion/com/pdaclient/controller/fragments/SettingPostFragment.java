@@ -6,7 +6,7 @@ import android.preference.PreferenceFragment;
 import com.afollestad.materialdialogs.prefs.MaterialListPreference;
 
 import deadlion.com.pdaclient.R;
-import deadlion.com.pdaclient.controller.provider.SettingProvider;
+import deadlion.com.pdaclient.controller.provider.setting.SettingProvider;
 
 /**
  * Created by Михаил on 11.08.2015.

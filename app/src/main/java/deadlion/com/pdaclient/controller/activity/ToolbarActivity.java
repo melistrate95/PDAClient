@@ -3,22 +3,10 @@ package deadlion.com.pdaclient.controller.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-
-import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
-import com.mikepenz.materialdrawer.model.DividerDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import deadlion.com.pdaclient.R;
-import deadlion.com.pdaclient.controller.provider.SettingProvider;
-import deadlion.com.pdaclient.controller.provider.ToolbarMainProvider;
-import deadlion.com.pdaclient.controller.provider.ToolbarProvider;
+import deadlion.com.pdaclient.controller.provider.setting.SettingProvider;
 import deadlion.com.pdaclient.view.listener.OnToolbarClickListener;
 
 /**

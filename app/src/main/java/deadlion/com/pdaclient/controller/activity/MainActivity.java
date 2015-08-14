@@ -1,29 +1,18 @@
 package deadlion.com.pdaclient.controller.activity;
 
-import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
-import android.view.View;
-import android.widget.AdapterView;
 
-import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.model.DividerDrawerItem;
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SectionDrawerItem;
-import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-
-import deadlion.com.pdaclient.R;
-import deadlion.com.pdaclient.controller.fragments.ListAllFragment;
-import deadlion.com.pdaclient.controller.provider.NavigationDrawerProvider;
-import deadlion.com.pdaclient.controller.provider.ToolbarMainProvider;
+import deadlion.com.pdaclient.controller.provider.toolbar.NavigationDrawerProvider;
+import deadlion.com.pdaclient.controller.provider.toolbar.ToolbarMainProvider;
 import deadlion.com.pdaclient.model.enum_model.NavDrawerIdentifier;
+import deadlion.com.pdaclient.model.enum_model.SpinnerCategory;
 
 
 public class MainActivity extends ToolbarActivity {
 
     public static int lastNavDrawerIdentifier = NavDrawerIdentifier.IDENTIFIER_POST;
+    public static int lastSpinnerCategory = SpinnerCategory.NEWS_CATEGORY;
     NavigationDrawerProvider navigationDrawerProvider;
 
     @Override

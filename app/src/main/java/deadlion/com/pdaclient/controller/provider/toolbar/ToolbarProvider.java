@@ -1,5 +1,6 @@
-package deadlion.com.pdaclient.controller.provider;
+package deadlion.com.pdaclient.controller.provider.toolbar;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -9,11 +10,11 @@ import android.view.Menu;
  */
 public abstract class ToolbarProvider {
 
-    protected Context context;
+    protected Activity context;
     protected Toolbar toolbar;
     protected Menu menu;
 
-    public ToolbarProvider(Context context, Toolbar toolbar) {
+    public ToolbarProvider(Activity context, Toolbar toolbar) {
         this.toolbar = toolbar;
         this.context = context;
     }

@@ -1,10 +1,8 @@
-package deadlion.com.pdaclient.controller.provider;
+package deadlion.com.pdaclient.controller.provider.toolbar;
 
 import android.app.Activity;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -20,6 +18,7 @@ import deadlion.com.pdaclient.R;
 import deadlion.com.pdaclient.controller.activity.MainActivity;
 import deadlion.com.pdaclient.controller.activity.SettingActivity;
 import deadlion.com.pdaclient.controller.fragments.ListAllFragment;
+import deadlion.com.pdaclient.controller.provider.toolbar.ToolbarMainProvider;
 import deadlion.com.pdaclient.model.enum_model.NavDrawerIdentifier;
 
 /**
@@ -53,32 +52,20 @@ public class NavigationDrawerProvider {
                     @Override
                     public boolean onItemClick(AdapterView<?> adapterView, View view, int i, long l, IDrawerItem iDrawerItem) {
                         int identifier = iDrawerItem.getIdentifier();
-                        FragmentManager manager = activity.getFragmentManager();
                         toolbarProvider.buildToolbar(identifier);
                         switch (identifier) {
-                            case NavDrawerIdentifier.IDENTIFIER_POST:
-                                MainActivity.lastNavDrawerIdentifier = identifier;
-                                manager.beginTransaction().replace(R.id.container, new ListAllFragment(), "ListFragment").commit();
-                                break;
-                            case NavDrawerIdentifier.IDENTIFIER_FAVORITE_POST:
-                                MainActivity.lastNavDrawerIdentifier = identifier;
-                                manager.beginTransaction().replace(R.id.container, new ListAllFragment(), "ListFragment").commit();
-                                break;
-                            case NavDrawerIdentifier.IDENTIFIER_FORUM:
-                                MainActivity.lastNavDrawerIdentifier = identifier;
-                                manager.beginTransaction().replace(R.id.container, new ListAllFragment(), "ListFragment").commit();
-                                break;
                             case NavDrawerIdentifier.IDENTIFIER_FAVORITE_TOPIC:
                                 MainActivity.lastNavDrawerIdentifier = identifier;
-                                break;
-                            case NavDrawerIdentifier.IDENTIFIER_DEVDB:
-                                MainActivity.lastNavDrawerIdentifier = identifier;
-                                manager.beginTransaction().replace(R.id.container, new ListAllFragment(), "ListFragment").commit();
                                 break;
                             case NavDrawerIdentifier.IDENTIFIER_SETTING:
                                 Intent intent = new Intent(activity, SettingActivity.class);
                                 activity.startActivity(intent);
                                 break;
+                            default:
+                                MainActivity.lastNavDrawerIdentifier = identifier;
+                                ListAllFragment fragment = ListAllFragment.newInstance(identifier, MainActivity.lastSpinnerCategory);
+                                FragmentManager manager = activity.getFragmentManager();
+                                manager.beginTransaction().replace(R.id.container, fragment).commit();
                         }
                         return false;
                     }

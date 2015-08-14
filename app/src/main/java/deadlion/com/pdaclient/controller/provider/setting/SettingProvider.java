@@ -1,4 +1,4 @@
-package deadlion.com.pdaclient.controller.provider;
+package deadlion.com.pdaclient.controller.provider.setting;
 
 import android.app.Activity;
 import android.content.Context;

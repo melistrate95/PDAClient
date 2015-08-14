@@ -1,5 +1,7 @@
-package deadlion.com.pdaclient.controller.provider;
+package deadlion.com.pdaclient.controller.provider.toolbar;
 
+import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
@@ -10,20 +12,23 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import deadlion.com.pdaclient.R;
-import deadlion.com.pdaclient.controller.activity.SettingActivity;
+import deadlion.com.pdaclient.controller.activity.MainActivity;
 import deadlion.com.pdaclient.controller.activity.SettingPostActivity;
-import deadlion.com.pdaclient.controller.fragments.SettingPostFragment;
+import deadlion.com.pdaclient.controller.fragments.ListAllFragment;
+import deadlion.com.pdaclient.controller.provider.toolbar.ToolbarProvider;
 import deadlion.com.pdaclient.model.enum_model.NavDrawerIdentifier;
+import deadlion.com.pdaclient.model.enum_model.PostCategory;
+import deadlion.com.pdaclient.model.enum_model.SpinnerCategory;
 
 /**
  * Created by Михаил on 07.08.2015.
  */
-public class ToolbarMainProvider extends ToolbarProvider{
+public class ToolbarMainProvider extends ToolbarProvider {
 
     private View spinnerView;
     private boolean hasSpinner = false;
 
-    public ToolbarMainProvider(final Context context, Toolbar toolbar) {
+    public ToolbarMainProvider(final Activity context, Toolbar toolbar) {
         super(context, toolbar);
         toolbar.inflateMenu(R.menu.menu_main);
         initializeSpinner();
@@ -42,14 +47,18 @@ public class ToolbarMainProvider extends ToolbarProvider{
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context, R.array.newsArray, R.layout.spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spinnerView = View.inflate(context.getApplicationContext(), R.layout.toolbar_spinner, null);
+        spinnerView = View.inflate(context, R.layout.toolbar_spinner, null);
         Spinner categorySpinner = (Spinner)spinnerView.findViewById(R.id.spinner);
         categorySpinner.setAdapter(adapter);
+        categorySpinner.setSelection(MainActivity.lastSpinnerCategory);
 
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
+                MainActivity.lastSpinnerCategory = i;
+                ListAllFragment fragment = ListAllFragment.newInstance(NavDrawerIdentifier.IDENTIFIER_POST, i);
+                FragmentManager manager = context.getFragmentManager();
+                manager.beginTransaction().replace(R.id.container, fragment).commit();
             }
 
             @Override

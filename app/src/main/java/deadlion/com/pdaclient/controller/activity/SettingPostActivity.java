@@ -4,9 +4,8 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 
 import deadlion.com.pdaclient.R;
-import deadlion.com.pdaclient.controller.fragments.SettingFragment;
 import deadlion.com.pdaclient.controller.fragments.SettingPostFragment;
-import deadlion.com.pdaclient.controller.provider.ToolbarSettingProvider;
+import deadlion.com.pdaclient.controller.provider.toolbar.ToolbarSettingProvider;
 
 /**
  * Created by Михаил on 12.08.2015.

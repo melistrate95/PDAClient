@@ -2,12 +2,10 @@ package deadlion.com.pdaclient.controller.activity;
 
 import android.app.FragmentManager;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 
 import deadlion.com.pdaclient.R;
 import deadlion.com.pdaclient.controller.fragments.SettingFragment;
-import deadlion.com.pdaclient.controller.fragments.SettingPostFragment;
-import deadlion.com.pdaclient.controller.provider.ToolbarSettingProvider;
+import deadlion.com.pdaclient.controller.provider.toolbar.ToolbarSettingProvider;
 
 /**
  * Created by Mike on 02.08.2015.
