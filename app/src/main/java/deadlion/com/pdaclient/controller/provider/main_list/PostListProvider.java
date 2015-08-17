@@ -6,6 +6,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import deadlion.com.pdaclient.controller.activity.MainActivity;
 import deadlion.com.pdaclient.controller.provider.setting.SettingProvider;
 import deadlion.com.pdaclient.model.Post;
 import deadlion.com.pdaclient.model.complex_type.Author;
@@ -25,11 +26,13 @@ public class PostListProvider extends ListProvider {
     }
 
     public void buildList() {
+        MainActivity.lastSpinnerCategory = SpinnerCategory.NEWS_CATEGORY;
         ArrayList<Post> posts = getPostList(PostCategory.getPostCategory(SpinnerCategory.NEWS_CATEGORY));
         settingProvider.setPostView(listView, posts);
     }
 
     public void buildList(int spinnerCategory) {
+        MainActivity.lastSpinnerCategory = spinnerCategory;
         ArrayList<Post> posts = getPostList(PostCategory.getPostCategory(spinnerCategory));
         settingProvider.setPostView(listView, posts);
     }
