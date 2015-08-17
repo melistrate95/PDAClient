@@ -1,8 +1,11 @@
 package deadlion.com.pdaclient.controller.activity;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
+import deadlion.com.pdaclient.R;
+import deadlion.com.pdaclient.controller.fragments.ListAllFragment;
 import deadlion.com.pdaclient.controller.provider.toolbar.NavigationDrawerProvider;
 import deadlion.com.pdaclient.controller.provider.toolbar.ToolbarMainProvider;
 import deadlion.com.pdaclient.model.enum_model.NavDrawerIdentifier;
@@ -21,6 +24,10 @@ public class MainActivity extends ToolbarActivity {
         ToolbarMainProvider toolbarProvider = new ToolbarMainProvider(this, toolbar);
         navigationDrawerProvider = new NavigationDrawerProvider(toolbarProvider, this);
         navigationDrawerProvider.initializeNavigationDrawer();
+        if (savedInstanceState == null) {
+            FragmentManager manager = getFragmentManager();
+            manager.beginTransaction().replace(R.id.container, new ListAllFragment(), "ListAllFragment").commit();
+        }
     }
 
     @Override

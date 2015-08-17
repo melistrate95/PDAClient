@@ -15,6 +15,7 @@ import deadlion.com.pdaclient.R;
 import deadlion.com.pdaclient.controller.activity.MainActivity;
 import deadlion.com.pdaclient.controller.activity.SettingPostActivity;
 import deadlion.com.pdaclient.controller.fragments.ListAllFragment;
+import deadlion.com.pdaclient.controller.provider.main_list.PostListProvider;
 import deadlion.com.pdaclient.controller.provider.toolbar.ToolbarProvider;
 import deadlion.com.pdaclient.model.enum_model.NavDrawerIdentifier;
 import deadlion.com.pdaclient.model.enum_model.PostCategory;
@@ -47,7 +48,7 @@ public class ToolbarMainProvider extends ToolbarProvider {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context, R.array.newsArray, R.layout.spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        spinnerView = View.inflate(context, R.layout.toolbar_spinner, null);
+        spinnerView = View.inflate(context.getApplication(), R.layout.toolbar_spinner, null);
         Spinner categorySpinner = (Spinner)spinnerView.findViewById(R.id.spinner);
         categorySpinner.setAdapter(adapter);
         categorySpinner.setSelection(MainActivity.lastSpinnerCategory);
@@ -55,10 +56,9 @@ public class ToolbarMainProvider extends ToolbarProvider {
         categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                MainActivity.lastSpinnerCategory = i;
-                ListAllFragment fragment = ListAllFragment.newInstance(NavDrawerIdentifier.IDENTIFIER_POST, i);
-                FragmentManager manager = context.getFragmentManager();
-                manager.beginTransaction().replace(R.id.container, fragment).commit();
+                ListAllFragment fragment = (ListAllFragment) context.getFragmentManager().findFragmentByTag("ListAllFragment");
+                PostListProvider postListProvider = new PostListProvider(context, fragment.getListView());
+                postListProvider.buildList(i);
             }
 
             @Override

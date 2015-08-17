@@ -27,13 +27,13 @@ import deadlion.com.pdaclient.model.enum_model.NavDrawerIdentifier;
 public class NavigationDrawerProvider {
 
     private ToolbarMainProvider toolbarProvider;
-    private Activity activity;
+    private Activity context;
     public Drawer navigationDrawer;
 
 
-    public NavigationDrawerProvider(ToolbarMainProvider toolbarProvider, Activity activity) {
+    public NavigationDrawerProvider(ToolbarMainProvider toolbarProvider, Activity context) {
         this.toolbarProvider = toolbarProvider;
-        this.activity = activity;
+        this.context = context;
     }
 
     public void initializeNavigationDrawer() {
@@ -41,7 +41,7 @@ public class NavigationDrawerProvider {
         final AccountHeader accountHeader = createAccountHeader();
 
         navigationDrawer = new DrawerBuilder()
-                .withActivity(activity)
+                .withActivity(context)
                 .withToolbar(toolbarProvider.getToolbar())
                 .withAccountHeader(accountHeader)
                 .withSelectedItem(-1)
@@ -54,18 +54,13 @@ public class NavigationDrawerProvider {
                         int identifier = iDrawerItem.getIdentifier();
                         toolbarProvider.buildToolbar(identifier);
                         switch (identifier) {
-                            case NavDrawerIdentifier.IDENTIFIER_FAVORITE_TOPIC:
-                                MainActivity.lastNavDrawerIdentifier = identifier;
-                                break;
                             case NavDrawerIdentifier.IDENTIFIER_SETTING:
-                                Intent intent = new Intent(activity, SettingActivity.class);
-                                activity.startActivity(intent);
+                                Intent intent = new Intent(context, SettingActivity.class);
+                                context.startActivity(intent);
                                 break;
                             default:
-                                MainActivity.lastNavDrawerIdentifier = identifier;
-                                ListAllFragment fragment = ListAllFragment.newInstance(identifier, MainActivity.lastSpinnerCategory);
-                                FragmentManager manager = activity.getFragmentManager();
-                                manager.beginTransaction().replace(R.id.container, fragment).commit();
+                                ListAllFragment fragment = (ListAllFragment) context.getFragmentManager().findFragmentByTag("ListAllFragment");
+                                fragment.chooseListProvider(identifier, MainActivity.lastSpinnerCategory);
                         }
                         return false;
                     }
@@ -92,10 +87,6 @@ public class NavigationDrawerProvider {
                         .withIcon(R.drawable.ic_forum)
                         .withIdentifier(NavDrawerIdentifier.IDENTIFIER_FORUM),
                 new SecondaryDrawerItem()
-                        .withName(R.string.item_favorite)
-                        .withIcon(R.drawable.ic_favorite)
-                        .withIdentifier(NavDrawerIdentifier.IDENTIFIER_FAVORITE_TOPIC),
-                new SecondaryDrawerItem()
                         .withName(R.string.item_devdb)
                         .withIcon(R.drawable.ic_devdb)
                         .withIdentifier(NavDrawerIdentifier.IDENTIFIER_DEVDB),
@@ -110,7 +101,7 @@ public class NavigationDrawerProvider {
 
     private AccountHeader createAccountHeader() {
         AccountHeaderBuilder accountHeaderBuilder = new AccountHeaderBuilder()
-                .withActivity(activity)
+                .withActivity(context)
                 .withHeaderBackground(R.drawable.header);
         return accountHeaderBuilder.build();
     }
