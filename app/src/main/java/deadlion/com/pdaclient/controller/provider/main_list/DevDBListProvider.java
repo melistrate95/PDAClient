@@ -4,11 +4,11 @@ import android.content.Context;
 import android.widget.ListView;
 
 /**
- * Created by Михаил on 14.08.2015.
+ * Created by Михаил on 17.08.2015.
  */
-public class ForumListProvider extends ListProvider{
+public class DevDBListProvider extends ListProvider {
 
-    public ForumListProvider(Context context, ListView listView) {
+    public DevDBListProvider(Context context, ListView listView) {
         super(context, listView);
     }
 

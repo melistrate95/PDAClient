@@ -162,7 +162,6 @@ public class SettingProvider {
                 }
                 break;
         }
-        postAdapter.setNotifyOnChange(true);
         listView.setAdapter(postAdapter);
     }
 }
