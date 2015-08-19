@@ -73,11 +73,11 @@ public abstract class BaseTable<TModel> {
 
     /***************** Safe CRUD *****************/
 
-    public void createTable() {
-        create();
+    public void create() {
+        createTable();
     }
 
-    public TModel getItemById(int id) {
+    public TModel get(int id) {
         return getBy("ID=?", new String[]{String.valueOf(id)}, null, null, null, null).get(0);
     }
 
@@ -85,26 +85,30 @@ public abstract class BaseTable<TModel> {
         return getBy(null, null, null, null, null, null);
     }
 
-    public long insertItem(TModel model) {
-        return insert(model);
+    public long insert(TModel model) {
+        return insertItem(model);
     }
 
-    public int updateItem(TModel model) {
-        return update(model, getUniqueColumnName() + "=?", new String[]{getUniqueColumnValue(model)});
+    public void insert(ArrayList<TModel> models) {
+        insertItems(models);
     }
 
-    public int deleteItem(TModel model) {
-        return delete(getUniqueColumnName() + "=?", new String[]{getUniqueColumnValue(model)});
+    public int update(TModel model) {
+        return updateBy(model, getUniqueColumnName() + "=?", new String[]{getUniqueColumnValue(model)});
+    }
+
+    public int delete(TModel model) {
+        return deleteBy(getUniqueColumnName() + "=?", new String[]{getUniqueColumnValue(model)});
     }
 
     public int deleteAll() {
-        return delete(null, null);
+        return deleteBy(null, null);
     }
 
 
     /***************** CRUD *****************/
 
-    private void create() {
+    protected void createTable() {
         SQLiteDatabase db = null;
 
         try {
@@ -122,7 +126,7 @@ public abstract class BaseTable<TModel> {
         }
     }
 
-    private ArrayList<TModel> getBy(String selection, String[] selectionArgs, String groupBy, String having,
+    protected ArrayList<TModel> getBy(String selection, String[] selectionArgs, String groupBy, String having,
                            String orderBy, String limit) {
 
         SQLiteDatabase db = null;
@@ -156,7 +160,7 @@ public abstract class BaseTable<TModel> {
         return items;
     }
 
-    private long insert(TModel model) {
+    protected long insertItem(TModel model) {
         SQLiteDatabase db = null;
         long result = -1;
 
@@ -178,7 +182,29 @@ public abstract class BaseTable<TModel> {
         return result;
     }
 
-    private int update(TModel model, String whereClause, String[] whereArgs) {
+    protected void insertItems(ArrayList<TModel> models) {
+        SQLiteDatabase db = null;
+
+        try {
+            db = dbHelper.getWritableDatabase();
+
+            for (TModel model : models) {
+                ContentValues values = getContentValues(model);
+                db.insert(tableName, null, values);
+            }
+        }
+        catch (Exception ex) {
+            Log.d(LOG_TAG, ex.getLocalizedMessage());
+        }
+        finally {
+            if (db != null) {
+                // db.endTransaction();
+                db.close();
+            }
+        }
+    }
+
+    protected int updateBy(TModel model, String whereClause, String[] whereArgs) {
         SQLiteDatabase db = null;
         int result = 0;
 
@@ -200,7 +226,7 @@ public abstract class BaseTable<TModel> {
         return result;
     }
 
-    private int update(ContentValues values, String whereClause, String[] whereArgs) {
+    protected int updateBy(ContentValues values, String whereClause, String[] whereArgs) {
         SQLiteDatabase db = null;
         int result = 0;
 
@@ -221,7 +247,7 @@ public abstract class BaseTable<TModel> {
         return result;
     }
 
-    private int delete(String whereClause, String[] whereArgs) {
+    protected int deleteBy(String whereClause, String[] whereArgs) {
         SQLiteDatabase db = null;
         int result = 0;
 

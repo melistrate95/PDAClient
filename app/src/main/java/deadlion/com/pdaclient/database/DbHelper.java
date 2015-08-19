@@ -18,7 +18,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         postTable = new PostTable(this);
-        postTable.createTable();
+        postTable.create();
     }
 
     @Override

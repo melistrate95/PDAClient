@@ -3,6 +3,8 @@ package deadlion.com.pdaclient.database.table;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+
 import deadlion.com.pdaclient.database.DbHelper;
 import deadlion.com.pdaclient.model.Post;
 import deadlion.com.pdaclient.model.complex_type.Author;
@@ -24,6 +26,16 @@ public class PostTable extends BaseTable<Post> {
     public final String COLUMN_DESCRIPTION = "DESCRIPTION";
     public final String COLUMN_TEXT = "TEXT";
     public final String COLUMN_COMMENTS = "COMMENTS";
+
+    /****************************************************************************/
+
+    protected ArrayList<Post> get(PostCategory category) {
+        return getBy(COLUMN_CATEGORY + "=?", new String[]{category.toString()}, null, null, null, null);
+    }
+
+    protected int delete(PostCategory category) {
+        return deleteBy(COLUMN_CATEGORY + "=?", new String[]{category.toString()});
+    }
 
     /****************************************************************************/
 
