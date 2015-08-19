@@ -39,6 +39,10 @@ public class SettingProvider {
         this.context = context;
     }
 
+    public Context getContext() {
+        return context;
+    }
+
     public void getTheme(MaterialListPreference themePreference) {
         themeDataPreference = context.getSharedPreferences("THEME_PREFERENCES", Context.MODE_PRIVATE);
         int index_color = themeDataPreference.getInt("THEME_ID", 0);

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import deadlion.com.pdaclient.controller.activity.MainActivity;
 import deadlion.com.pdaclient.controller.fragments.ListAllFragment;
 import deadlion.com.pdaclient.controller.provider.setting.SettingProvider;
+import deadlion.com.pdaclient.database.DbHelper;
 import deadlion.com.pdaclient.model.Post;
 import deadlion.com.pdaclient.model.complex_type.Author;
 import deadlion.com.pdaclient.model.enum_model.PostCategory;
@@ -26,17 +27,20 @@ import deadlion.com.pdaclient.view.adapter.ItemPostAdapter;
  */
 public class PostLoader {
 
-    ArrayList<Post> posts = new ArrayList<>();
     ListView listView;
     SettingProvider settingProvider;
     int spinnerCategory = MainActivity.lastSpinnerCategory;
+    DbHelper dbHelper;
 
     public PostLoader(ListView listView, SettingProvider settingProvider) {
         this.listView = listView;
         this.settingProvider = settingProvider;
+        dbHelper = new DbHelper(settingProvider.getContext());
     }
 
     public class LoadPostsThread extends AsyncTask<String, Void, String> {
+
+        ArrayList<Post> posts = new ArrayList<>();
 
         @Override
         protected void onPreExecute() {

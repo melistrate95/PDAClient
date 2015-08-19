@@ -62,4 +62,14 @@
     <string name="item_devdb">DevDB</string>
     <string name="item_setting">Настройки</string>
 
+    <!-- Контекстное меню поста -->
+    <string name="add_to_favorite">Добавить в избранное</string>
+    <string name="remove_from_favorite">Удалить из избранного</string>
+    <string name="copy_in_buffer">Скопировать URL в буффер</string>
+    <string name="share">Поделиться</string>
+
+    <!-- Всплывающие подсказки состояния поста -->
+    <string name="copy_url">URL скопирован в буфер обмена</string>
+    <string name="add_post">Пост добавлена в избранное</string>
+
 </resources>
