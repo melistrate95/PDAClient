@@ -12,28 +12,28 @@ import deadlion.com.pdaclient.model.enum_model.PostCategory;
 
 public class PostTable extends BaseTable<Post> {
 
-    public final String COLUMN_CATEGORY = "CATEGORY";
-    public final String COLUMN_PHOTO_URL = "PHOTO_URL";
+    private final String COLUMN_CATEGORY = "CATEGORY";
+    private final String COLUMN_PHOTO_URL = "PHOTO_URL";
 
-    public final String COLUMN_AUTHOR_NICKNAME = "AUTHOR_NICKNAME";
-    public final String COLUMN_AUTHOR_MEMBER_ID = "AUTHOR_MEMBER_ID";
+    private final String COLUMN_AUTHOR_NICKNAME = "AUTHOR_NICKNAME";
+    private final String COLUMN_AUTHOR_MEMBER_ID = "AUTHOR_MEMBER_ID";
 
-    public final String COLUMN_DATE_OF_PUBLICATION = "DATE_OF_PUBLICATION";
-    public final String COLUMN_COUNT_OF_COMMENTS = "COUNT_OF_COMMENTS";
-    public final String COLUMN_URL = "URL";
+    private final String COLUMN_DATE_OF_PUBLICATION = "DATE_OF_PUBLICATION";
+    private final String COLUMN_COUNT_OF_COMMENTS = "COUNT_OF_COMMENTS";
+    private final String COLUMN_URL = "URL";
 
-    public final String COLUMN_TITLE = "TITLE";
-    public final String COLUMN_DESCRIPTION = "DESCRIPTION";
-    public final String COLUMN_TEXT = "TEXT";
-    public final String COLUMN_COMMENTS = "COMMENTS";
+    private final String COLUMN_TITLE = "TITLE";
+    private final String COLUMN_DESCRIPTION = "DESCRIPTION";
+    private final String COLUMN_TEXT = "TEXT";
+    private final String COLUMN_COMMENTS = "COMMENTS";
 
     /****************************************************************************/
 
-    protected ArrayList<Post> get(PostCategory category) {
+    public ArrayList<Post> get(PostCategory category) {
         return getBy(COLUMN_CATEGORY + "=?", new String[]{category.toString()}, null, null, null, null);
     }
 
-    protected int delete(PostCategory category) {
+    public int delete(PostCategory category) {
         return deleteBy(COLUMN_CATEGORY + "=?", new String[]{category.toString()});
     }
 
