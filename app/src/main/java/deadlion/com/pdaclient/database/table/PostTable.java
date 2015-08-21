@@ -50,19 +50,19 @@ public class PostTable extends BaseTable<Post> {
     @Override
     protected String getCreateTableQuery() {
         return "CREATE TABLE " + tableName + " ("
-                + "ID INTEGER PRIMARY KEY AUTOINCREMENT"
-                + COLUMN_CATEGORY + "TEXT, "
-                + COLUMN_TITLE + "TEXT, "
-                + COLUMN_PHOTO_URL + "TEXT, "
-                + COLUMN_AUTHOR_NICKNAME + "TEXT, "
-                + COLUMN_AUTHOR_MEMBER_ID + "TEXT, "
-                + COLUMN_DATE_OF_PUBLICATION + "TEXT, "
-                + COLUMN_COUNT_OF_COMMENTS + "INTEGER, "
-                + COLUMN_DESCRIPTION + "TEXT, "
-                + COLUMN_URL + "TEXT, "
+                + "ID INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COLUMN_CATEGORY + " TEXT, "
+                + COLUMN_TITLE + " TEXT, "
+                + COLUMN_PHOTO_URL + " TEXT, "
+                + COLUMN_AUTHOR_NICKNAME + " TEXT, "
+                + COLUMN_AUTHOR_MEMBER_ID + " TEXT, "
+                + COLUMN_DATE_OF_PUBLICATION + " TEXT, "
+                + COLUMN_COUNT_OF_COMMENTS + " INTEGER, "
+                + COLUMN_DESCRIPTION + " TEXT, "
+                + COLUMN_URL + " TEXT, "
 
-                + COLUMN_TEXT + "TEXT, "
-                + COLUMN_COMMENTS + "TEXT"
+                + COLUMN_TEXT + " TEXT, "
+                + COLUMN_COMMENTS + " TEXT"
                 + ");";
     }
 

@@ -12,13 +12,14 @@ public class DbHelper extends SQLiteOpenHelper {
     private PostTable postTable;
 
     public DbHelper(Context context) {
-        super(context, "PostDB", null, 1);
+        super(context, "PdaClientDb", null, 1);
+
+        postTable = new PostTable(this);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        postTable = new PostTable(this);
-        postTable.create();
+        postTable.create(db);
     }
 
     @Override

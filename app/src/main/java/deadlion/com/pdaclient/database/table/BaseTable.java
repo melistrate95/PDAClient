@@ -73,8 +73,8 @@ public abstract class BaseTable<TModel> {
 
     /***************** Safe CRUD *****************/
 
-    public void create() {
-        createTable();
+    public void create(SQLiteDatabase db) {
+        createTable(db);
     }
 
     public TModel get(int id) {
@@ -108,21 +108,12 @@ public abstract class BaseTable<TModel> {
 
     /***************** CRUD *****************/
 
-    protected void createTable() {
-        SQLiteDatabase db = null;
-
+    protected void createTable(SQLiteDatabase db) {
         try {
-            db = dbHelper.getWritableDatabase();
             db.execSQL(getCreateTableQuery());
         }
         catch (Exception ex) {
             Log.d(LOG_TAG, ex.getLocalizedMessage());
-        }
-        finally {
-            if (db != null) {
-                // db.endTransaction();
-                db.close();
-            }
         }
     }
 
