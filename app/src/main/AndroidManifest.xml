@@ -21,7 +21,7 @@
         </activity>
         <activity android:name=".controller.activity.SettingActivity" />
         <activity android:name=".controller.activity.SettingPostActivity" />
-        <activity android:name=".controller.activity.FullPostActivity" />
+        <activity android:name=".controller.activity.PostActivity" />
     </application>
 
 </manifest>

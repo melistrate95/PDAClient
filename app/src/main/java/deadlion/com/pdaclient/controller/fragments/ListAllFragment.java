@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.jsoup.Jsoup;
@@ -26,11 +27,13 @@ import deadlion.com.pdaclient.controller.provider.main_list.FavoritePostListProv
 import deadlion.com.pdaclient.controller.provider.main_list.ForumListProvider;
 import deadlion.com.pdaclient.controller.provider.main_list.PostListProvider;
 import deadlion.com.pdaclient.controller.provider.setting.SettingProvider;
+import deadlion.com.pdaclient.database.DbHelper;
 import deadlion.com.pdaclient.model.Post;
 import deadlion.com.pdaclient.model.complex_type.Author;
 import deadlion.com.pdaclient.model.enum_model.NavDrawerIdentifier;
 import deadlion.com.pdaclient.model.enum_model.PostCategory;
 import deadlion.com.pdaclient.model.enum_model.SpinnerCategory;
+import deadlion.com.pdaclient.view.listener.OnListItemClickListener;
 
 public class ListAllFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
@@ -49,6 +52,7 @@ public class ListAllFragment extends Fragment implements SwipeRefreshLayout.OnRe
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         listView = (ListView) view.findViewById(R.id.posts);
         listView.setDivider(getResources().getDrawable(android.R.color.transparent));
+        listView.setOnItemClickListener(new OnListItemClickListener());
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.WHITE, Color.BLUE, Color.WHITE);

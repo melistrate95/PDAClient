@@ -5,7 +5,7 @@ import android.os.Bundle;
 /**
  * Created by Mike on 02.08.2015.
  */
-public class FullPostActivity extends ToolbarActivity {
+public class PostActivity extends ToolbarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

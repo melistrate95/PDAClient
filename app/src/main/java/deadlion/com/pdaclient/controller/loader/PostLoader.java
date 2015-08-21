@@ -30,17 +30,19 @@ public class PostLoader {
     ListView listView;
     SettingProvider settingProvider;
     int spinnerCategory = MainActivity.lastSpinnerCategory;
+
+    ArrayList<Post> posts = new ArrayList<>();
+
     DbHelper dbHelper;
 
     public PostLoader(ListView listView, SettingProvider settingProvider) {
         this.listView = listView;
         this.settingProvider = settingProvider;
         dbHelper = new DbHelper(settingProvider.getContext());
+        posts = dbHelper.getPostTable().get(PostCategory.getPostCategory(MainActivity.lastSpinnerCategory));
     }
 
     public class LoadPostsThread extends AsyncTask<String, Void, String> {
-
-        ArrayList<Post> posts = new ArrayList<>();
 
         @Override
         protected void onPreExecute() {
@@ -70,6 +72,9 @@ public class PostLoader {
                 }
                 Elements countComments = doc.select(getCountCommentsAttr());
                 for (int i = 0; i < photo.size(); i ++) {
+                    if (i == 0) {
+                        dbHelper.getPostTable().delete(PostCategory.getPostCategory(MainActivity.lastSpinnerCategory));
+                    }
                     String titleStr = title.get(i).attr("title");
                     String urlStr = url.get(i).attr("href");
                     String photoStr = photo.get(i).attr("src");
@@ -85,13 +90,14 @@ public class PostLoader {
                         authorName = author.get(i).text();
                     }
                     Integer countCommentsInt = Integer.parseInt(countComments.get(i).text());
-                    Post post = new Post(titleStr, dataStr, PostCategory.NEWS_CATEGORY, urlStr, photoStr, dateOfPublicationStr, countCommentsInt , new Author(authorName, "104324"));
+                    Post post = new Post(titleStr, dataStr, PostCategory.getPostCategory(MainActivity.lastSpinnerCategory), urlStr, photoStr, dateOfPublicationStr, countCommentsInt , new Author(authorName, "104324"));
                     if (posts.size() > i) {
                         posts.set(i, post);
                     }
                     else {
                         posts.add(post);
                     }
+                    dbHelper.getPostTable().insert(post);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
