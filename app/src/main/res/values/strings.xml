@@ -69,7 +69,8 @@
 
     <!-- Всплывающие подсказки состояния поста -->
     <string name="copy_url">URL скопирован в буфер обмена</string>
-    <string name="add_post">Пост добавлена в избранное</string>
+    <string name="add_post">Пост добавлен в избранное</string>
+    <string name="remove_post">Пост удален из избранного</string>
     <string name="item_share">Поделиться</string>
     <string name="no_connected">Нет соединения</string>
 

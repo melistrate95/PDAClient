@@ -16,6 +16,7 @@ import android.webkit.WebViewClient;
 
 import deadlion.com.pdaclient.R;
 import deadlion.com.pdaclient.controller.activity.PostActivity;
+import deadlion.com.pdaclient.controller.loader.FullPostLoader;
 import deadlion.com.pdaclient.controller.loader.PostLoader;
 import deadlion.com.pdaclient.model.Post;
 
@@ -43,19 +44,14 @@ public class PostFragment extends Fragment {
         View v = inflater.inflate(R.layout.web_fragment, container, false);
         webView  = (WebView) v.findViewById(R.id.web_view);
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setSaveFormData(true);
-        webView.setDownloadListener(new DownloadListener() {
-            @Override
-            public void onDownloadStart(String url, String userAgent, String contentDisposition, String mimetype, long contentLength) {
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            }
-        });
+        webView.getSettings().setDefaultTextEncodingName("windows-1251");
         webView.setWebViewClient(new MyClient());
         Bundle args = getArguments();
         url = args.getString("url");
-        webView.loadUrl(url);
+        /******************************************/
+        FullPostLoader fullPostLoader = new FullPostLoader(webView, url);
+        fullPostLoader.loadPost();
+        /******************************************/
         post = PostLoader.getArrayPosts().get(PostActivity.getViewPager().getCurrentItem());
         PostActivity.getToolbarProvider().buildToolbar(post.getTitle());
         return v;

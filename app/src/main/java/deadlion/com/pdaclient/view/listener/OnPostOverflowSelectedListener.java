@@ -73,8 +73,7 @@ public class OnPostOverflowSelectedListener implements View.OnClickListener {
     private void copyInBuffer(Post copyPost) {
         String bufferUrl = "http://4pda.ru/" + copyPost.getUrl();
         ((ClipboardManager) context.getSystemService(context.CLIPBOARD_SERVICE)).setText(bufferUrl);
-        Toast toast = Toast.makeText(context, context.getResources().getString(R.string.copy_url), Toast.LENGTH_SHORT);
-        toast.show();
+        Toast.makeText(context, context.getResources().getString(R.string.copy_url), Toast.LENGTH_SHORT).show();
     }
 
     private void addToFavorite(Post addPost) {
@@ -82,7 +81,7 @@ public class OnPostOverflowSelectedListener implements View.OnClickListener {
         favoritePost.setCategory(PostCategory.FAVORITE_CATEGORY);
         DbHelper dbHelper = new DbHelper(context);
         dbHelper.getPostTable().insert(favoritePost);
-        Toast.makeText(context, context.getResources().getString(R.string.add_to_favorite), Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, context.getResources().getString(R.string.add_post), Toast.LENGTH_SHORT).show();
     }
 
     private void removeFromFavorite(Post removePost) {
@@ -91,5 +90,6 @@ public class OnPostOverflowSelectedListener implements View.OnClickListener {
         FavoritePostListProvider favoritePostListProvider = new FavoritePostListProvider(context, ListAllFragment.getListView());
         favoritePostListProvider.buildList();
         ListAllFragment.getmSwipeRefreshLayout().setEnabled(false);
+        Toast.makeText(context, context.getResources().getString(R.string.remove_post), Toast.LENGTH_SHORT).show();
     }
 }
