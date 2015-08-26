@@ -6,6 +6,7 @@ import android.webkit.WebView;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
@@ -26,6 +27,18 @@ public class FullPostLoader {
 
     public class LoadPostThread extends AsyncTask<String, Void, String> {
 
+        private void removeElements(Elements elements) {
+            if (elements != null) {
+                elements.remove();
+            }
+        }
+
+        private void removeElement(Element element) {
+            if (element != null) {
+                element.remove();
+            }
+        }
+
         String text = "";
 
         @Override
@@ -37,11 +50,17 @@ public class FullPostLoader {
             Document doc;
             try {
                 doc = Jsoup.connect(url).get();
-                Element head = doc.select("head").first();
-                Element el1 = doc.select("article[id=content]").first();
-//                Element el1 = doc.select("div.container").first();
-//                Element el2 = doc.select("div.comment-box").first();
-                text = head.html() + el1.html();
+                removeElement(doc.getElementById("top-adbox"));
+                removeElement(doc.getElementById("header"));
+                removeElements(doc.getElementsByClass("slider-news"));
+                removeElements(doc.getElementsByClass("materials-box"));
+                removeElements(doc.getElementsByClass("more-meta"));
+                removeElements(doc.getElementsByClass("box"));
+                removeElements(doc.getElementsByAttribute("data-callfn"));
+                removeElement(doc.getElementById("commentform"));
+                removeElement(doc.getElementById("footer"));
+
+                text = doc.html();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -50,7 +69,7 @@ public class FullPostLoader {
 
         @Override
         protected void onPostExecute(String result) {
-            webView.loadDataWithBaseURL(null, text, "text/html", "ru-RU", null);
+            webView.loadDataWithBaseURL(null, text, "text/html", "UTF-8", null);
         }
     }
 
