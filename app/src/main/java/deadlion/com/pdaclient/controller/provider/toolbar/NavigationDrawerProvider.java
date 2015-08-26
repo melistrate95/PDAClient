@@ -18,6 +18,7 @@ import deadlion.com.pdaclient.R;
 import deadlion.com.pdaclient.controller.activity.MainActivity;
 import deadlion.com.pdaclient.controller.activity.SettingActivity;
 import deadlion.com.pdaclient.controller.fragments.ListAllFragment;
+import deadlion.com.pdaclient.controller.provider.main_list.PostListProvider;
 import deadlion.com.pdaclient.controller.provider.toolbar.ToolbarMainProvider;
 import deadlion.com.pdaclient.model.enum_model.NavDrawerIdentifier;
 
@@ -60,7 +61,7 @@ public class NavigationDrawerProvider {
                                 break;
                             default:
                                 ListAllFragment fragment = (ListAllFragment) context.getFragmentManager().findFragmentByTag("ListAllFragment");
-                                fragment.chooseListProvider(identifier, MainActivity.lastSpinnerCategory);
+                                fragment.chooseOfflineListProvider(identifier, MainActivity.lastSpinnerCategory);
                         }
                         return false;
                     }

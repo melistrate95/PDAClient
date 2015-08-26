@@ -1,8 +1,14 @@
 package deadlion.com.pdaclient.controller.loader;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Parcelable;
+import android.support.annotation.IntRange;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,8 +18,11 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import deadlion.com.pdaclient.R;
 import deadlion.com.pdaclient.controller.activity.MainActivity;
+import deadlion.com.pdaclient.controller.activity.PostActivity;
 import deadlion.com.pdaclient.controller.fragments.ListAllFragment;
+import deadlion.com.pdaclient.controller.provider.setting.InternetProvider;
 import deadlion.com.pdaclient.controller.provider.setting.SettingProvider;
 import deadlion.com.pdaclient.database.DbHelper;
 import deadlion.com.pdaclient.model.Post;
@@ -21,6 +30,7 @@ import deadlion.com.pdaclient.model.complex_type.Author;
 import deadlion.com.pdaclient.model.enum_model.PostCategory;
 import deadlion.com.pdaclient.model.enum_model.SpinnerCategory;
 import deadlion.com.pdaclient.view.adapter.ItemPostAdapter;
+import deadlion.com.pdaclient.view.listener.OnListItemClickListener;
 
 /**
  * Created by Михаил on 18.08.2015.
@@ -28,18 +38,25 @@ import deadlion.com.pdaclient.view.adapter.ItemPostAdapter;
 public class PostLoader {
 
     ListView listView;
+    Context context;
+
     SettingProvider settingProvider;
     int spinnerCategory = MainActivity.lastSpinnerCategory;
 
-    ArrayList<Post> posts = new ArrayList<>();
+    private static ArrayList<Post> posts = new ArrayList<>();
 
     DbHelper dbHelper;
 
-    public PostLoader(ListView listView, SettingProvider settingProvider) {
+    public PostLoader(Context context, ListView listView) {
         this.listView = listView;
-        this.settingProvider = settingProvider;
-        dbHelper = new DbHelper(settingProvider.getContext());
+        this.context = context;
+        settingProvider = new SettingProvider(context);
+        dbHelper = new DbHelper(context);
         posts = dbHelper.getPostTable().get(PostCategory.getPostCategory(MainActivity.lastSpinnerCategory));
+    }
+
+    public static ArrayList<Post> getArrayPosts() {
+        return posts;
     }
 
     public class LoadPostsThread extends AsyncTask<String, Void, String> {
@@ -54,6 +71,9 @@ public class PostLoader {
                     ListAllFragment.mSwipeRefreshLayout.setRefreshing(true);
                 }
             });
+            if (!InternetProvider.isConnected(context)) {
+                Toast.makeText(context, context.getResources().getString(R.string.no_connected), Toast.LENGTH_SHORT).show();
+            }
         }
 
         @Override
@@ -76,7 +96,7 @@ public class PostLoader {
                         dbHelper.getPostTable().delete(PostCategory.getPostCategory(MainActivity.lastSpinnerCategory));
                     }
                     String titleStr = title.get(i).attr("title");
-                    String urlStr = url.get(i).attr("href");
+                    String urlStr = "http://4pda.ru/" + url.get(i).attr("href");
                     String photoStr = photo.get(i).attr("src");
                     String dataStr = "";
                     Elements sub = data.get(i).select(getSubDataAttr());
@@ -107,13 +127,24 @@ public class PostLoader {
 
         @Override
         protected void onPostExecute(String result) {
+            Parcelable state = listView.onSaveInstanceState();
             settingProvider.setPostView(listView, posts);
+            listView.onRestoreInstanceState(state);
             ListAllFragment.mSwipeRefreshLayout.setRefreshing(false);
         }
     }
 
     public void loadPosts() {
         new LoadPostsThread().execute();
+    }
+
+    public void showPosts() {
+        if (posts.isEmpty()) {
+            new LoadPostsThread().execute();
+        }
+        else {
+            settingProvider.setPostView(listView, posts);
+        }
     }
 
     protected String getHTTPPath() {

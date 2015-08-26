@@ -2,7 +2,6 @@
 
     <string name="app_name">PDAClient</string>
 
-    <string name="no_connected">No connected</string>
     <string name="item_online">Профиль</string>
     <string name="item_offline">Войти</string>
     <string name="item_search">Поиск</string>
@@ -71,5 +70,7 @@
     <!-- Всплывающие подсказки состояния поста -->
     <string name="copy_url">URL скопирован в буфер обмена</string>
     <string name="add_post">Пост добавлена в избранное</string>
+    <string name="item_share">Поделиться</string>
+    <string name="no_connected">Нет соединения</string>
 
 </resources>

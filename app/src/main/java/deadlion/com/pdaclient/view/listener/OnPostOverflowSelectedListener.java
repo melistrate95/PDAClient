@@ -59,7 +59,7 @@ public class OnPostOverflowSelectedListener implements View.OnClickListener {
     private void shareNewsData(Post sharePost) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT,  "http://4pda.ru/" + sharePost.getUrl());
+        intent.putExtra(Intent.EXTRA_TEXT, sharePost.getUrl());
         intent.putExtra(Intent.EXTRA_SUBJECT, sharePost.getTitle());
         intent = Intent.createChooser(intent, context.getString(R.string.share));
         context.startActivity(intent);

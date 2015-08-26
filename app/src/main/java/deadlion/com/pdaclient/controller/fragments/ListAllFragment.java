@@ -52,7 +52,7 @@ public class ListAllFragment extends Fragment implements SwipeRefreshLayout.OnRe
         View view = inflater.inflate(R.layout.fragment_list, container, false);
         listView = (ListView) view.findViewById(R.id.posts);
         listView.setDivider(getResources().getDrawable(android.R.color.transparent));
-        listView.setOnItemClickListener(new OnListItemClickListener());
+        listView.setOnItemClickListener(new OnListItemClickListener(getActivity()));
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.WHITE, Color.BLUE, Color.WHITE);
@@ -81,6 +81,32 @@ public class ListAllFragment extends Fragment implements SwipeRefreshLayout.OnRe
             case NavDrawerIdentifier.IDENTIFIER_POST:
                 PostListProvider postListProvider = new PostListProvider(getActivity(), listView);
                 postListProvider.buildList(spinnerCategory);
+                break;
+            case NavDrawerIdentifier.IDENTIFIER_FAVORITE_POST:
+                FavoritePostListProvider favoritePostListProvider = new FavoritePostListProvider(getActivity(), listView);
+                favoritePostListProvider.buildList();
+                break;
+            case NavDrawerIdentifier.IDENTIFIER_FORUM:
+                ForumListProvider forumListProvider = new ForumListProvider(getActivity(), listView);
+                forumListProvider.buildList();
+                break;
+            case NavDrawerIdentifier.IDENTIFIER_DEVDB:
+                DevDBListProvider devDBListProvider = new DevDBListProvider(getActivity(), listView);
+                devDBListProvider.buildList();
+                break;
+        }
+        if (state != null) {
+            listView.onRestoreInstanceState(state);
+        }
+    }
+
+    public void chooseOfflineListProvider(int navIdentifier, int spinnerCategory) {
+        MainActivity.lastNavDrawerIdentifier = navIdentifier;
+        MainActivity.lastSpinnerCategory = spinnerCategory;
+        switch (navIdentifier) {
+            case NavDrawerIdentifier.IDENTIFIER_POST:
+                PostListProvider postListProvider = new PostListProvider(getActivity(), listView);
+                postListProvider.buildOfflineList(spinnerCategory);
                 break;
             case NavDrawerIdentifier.IDENTIFIER_FAVORITE_POST:
                 FavoritePostListProvider favoritePostListProvider = new FavoritePostListProvider(getActivity(), listView);

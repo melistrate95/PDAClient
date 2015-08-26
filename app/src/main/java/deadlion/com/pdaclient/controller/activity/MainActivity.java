@@ -19,6 +19,11 @@ public class MainActivity extends ToolbarActivity {
     NavigationDrawerProvider navigationDrawerProvider;
 
     @Override
+    protected int getLayoutResId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ToolbarMainProvider toolbarProvider = new ToolbarMainProvider(this, toolbar);

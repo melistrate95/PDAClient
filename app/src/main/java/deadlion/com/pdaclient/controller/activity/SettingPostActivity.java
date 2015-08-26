@@ -13,6 +13,11 @@ import deadlion.com.pdaclient.controller.provider.toolbar.ToolbarSettingProvider
 public class SettingPostActivity extends ToolbarActivity {
 
     @Override
+    protected int getLayoutResId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ToolbarSettingProvider toolbarProvider = new ToolbarSettingProvider(this, toolbar);

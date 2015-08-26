@@ -16,18 +16,20 @@ public abstract class ToolbarActivity extends AppCompatActivity {
 
     Toolbar toolbar;
 
+    protected abstract int getLayoutResId();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SettingProvider settingProvider = new SettingProvider(this);
         settingProvider.setTheme();
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(getLayoutResId());
         initToolbar();
     }
 
     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setOnMenuItemClickListener(new OnToolbarClickListener());
+        toolbar.setOnMenuItemClickListener(new OnToolbarClickListener(this));
         toolbar.setNavigationIcon(android.support.v7.appcompat.R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

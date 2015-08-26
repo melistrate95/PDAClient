@@ -145,7 +145,12 @@ public class SettingProvider {
                         postAdapter = new FullItemPostAdapter(context, posts);
                         break;
                     case 1:
-                        postAdapter = new FullItemPostAdapter(context, posts);
+                        if (InternetProvider.isWiFi(context)) {
+                            postAdapter = new FullItemPostAdapter(context, posts);
+                        }
+                        else {
+                            postAdapter = new FullWithoutImageItemPostAdapter(context, posts);
+                        }
                         break;
                     case 2:
                         postAdapter = new FullWithoutImageItemPostAdapter(context, posts);
@@ -158,7 +163,12 @@ public class SettingProvider {
                         postAdapter = new ShortItemPostAdapter(context, posts);
                         break;
                     case 1:
-                        postAdapter = new ShortItemPostAdapter(context, posts);
+                        if (InternetProvider.isWiFi(context)) {
+                            postAdapter = new ShortItemPostAdapter(context, posts);
+                        }
+                        else {
+                            postAdapter = new ShortWithoutImageItemPostAdapter(context, posts);
+                        }
                         break;
                     case 2:
                         postAdapter = new ShortWithoutImageItemPostAdapter(context, posts);

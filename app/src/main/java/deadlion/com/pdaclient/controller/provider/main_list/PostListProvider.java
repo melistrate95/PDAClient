@@ -28,7 +28,13 @@ public class PostListProvider extends ListProvider {
 
     public void buildList(int spinnerCategory) {
         MainActivity.lastSpinnerCategory = spinnerCategory;
-        PostLoader postLoader = new PostLoader(listView, settingProvider);
+        PostLoader postLoader = new PostLoader(context, listView);
         postLoader.loadPosts();
+    }
+
+    public void buildOfflineList(int spinnerCategory) {
+        MainActivity.lastSpinnerCategory = spinnerCategory;
+        PostLoader postLoader = new PostLoader(context, listView);
+        postLoader.showPosts();
     }
 }

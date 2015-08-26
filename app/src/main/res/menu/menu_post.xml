@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:id="@+id/all_item">
+        <item
+            android:id="@+id/action_share"
+            android:title="@string/item_share"
+            android:icon="@drawable/abc_ic_menu_share_mtrl_alpha"
+            app:showAsAction="always" />
+    </group>
+</menu>
