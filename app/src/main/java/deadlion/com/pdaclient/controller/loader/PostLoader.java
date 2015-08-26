@@ -65,10 +65,10 @@ public class PostLoader {
         protected void onPreExecute() {
             super.onPreExecute();
             settingProvider.setPostView(listView, posts);
-            ListAllFragment.mSwipeRefreshLayout.post(new Runnable() {
+            ListAllFragment.getmSwipeRefreshLayout().post(new Runnable() {
                 @Override
                 public void run() {
-                    ListAllFragment.mSwipeRefreshLayout.setRefreshing(true);
+                    ListAllFragment.getmSwipeRefreshLayout().setRefreshing(true);
                 }
             });
             if (!InternetProvider.isConnected(context)) {
@@ -130,7 +130,7 @@ public class PostLoader {
             Parcelable state = listView.onSaveInstanceState();
             settingProvider.setPostView(listView, posts);
             listView.onRestoreInstanceState(state);
-            ListAllFragment.mSwipeRefreshLayout.setRefreshing(false);
+            ListAllFragment.getmSwipeRefreshLayout().setRefreshing(false);
         }
     }
 

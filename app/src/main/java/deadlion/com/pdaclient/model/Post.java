@@ -68,6 +68,10 @@ public class Post {
         this.text = text;
     }
 
+    public void setCategory(PostCategory category) {
+        this.category = category;
+    }
+
     /************************************************************/
 
     public Post(String title, String description, PostCategory category, String url, String photoUrl, String dateOfPublication, int countOfComments, Author author) {

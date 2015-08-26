@@ -38,8 +38,8 @@ import deadlion.com.pdaclient.view.listener.OnListItemClickListener;
 public class ListAllFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
 
     Parcelable state;
-    public static SwipeRefreshLayout mSwipeRefreshLayout;
-    private ListView listView;
+    private static SwipeRefreshLayout mSwipeRefreshLayout;
+    private static ListView listView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,8 +70,12 @@ public class ListAllFragment extends Fragment implements SwipeRefreshLayout.OnRe
         chooseListProvider(MainActivity.lastNavDrawerIdentifier, MainActivity.lastSpinnerCategory);
     }
 
-    public ListView getListView() {
+    public static ListView getListView() {
         return listView;
+    }
+
+    public static SwipeRefreshLayout getmSwipeRefreshLayout() {
+        return mSwipeRefreshLayout;
     }
 
     public void chooseListProvider(int navIdentifier, int spinnerCategory) {
@@ -81,18 +85,22 @@ public class ListAllFragment extends Fragment implements SwipeRefreshLayout.OnRe
             case NavDrawerIdentifier.IDENTIFIER_POST:
                 PostListProvider postListProvider = new PostListProvider(getActivity(), listView);
                 postListProvider.buildList(spinnerCategory);
+                mSwipeRefreshLayout.setEnabled(true);
                 break;
             case NavDrawerIdentifier.IDENTIFIER_FAVORITE_POST:
                 FavoritePostListProvider favoritePostListProvider = new FavoritePostListProvider(getActivity(), listView);
                 favoritePostListProvider.buildList();
+                mSwipeRefreshLayout.setEnabled(false);
                 break;
             case NavDrawerIdentifier.IDENTIFIER_FORUM:
                 ForumListProvider forumListProvider = new ForumListProvider(getActivity(), listView);
                 forumListProvider.buildList();
+                mSwipeRefreshLayout.setEnabled(true);
                 break;
             case NavDrawerIdentifier.IDENTIFIER_DEVDB:
                 DevDBListProvider devDBListProvider = new DevDBListProvider(getActivity(), listView);
                 devDBListProvider.buildList();
+                mSwipeRefreshLayout.setEnabled(true);
                 break;
         }
         if (state != null) {
@@ -107,18 +115,22 @@ public class ListAllFragment extends Fragment implements SwipeRefreshLayout.OnRe
             case NavDrawerIdentifier.IDENTIFIER_POST:
                 PostListProvider postListProvider = new PostListProvider(getActivity(), listView);
                 postListProvider.buildOfflineList(spinnerCategory);
+                mSwipeRefreshLayout.setEnabled(true);
                 break;
             case NavDrawerIdentifier.IDENTIFIER_FAVORITE_POST:
                 FavoritePostListProvider favoritePostListProvider = new FavoritePostListProvider(getActivity(), listView);
                 favoritePostListProvider.buildList();
+                mSwipeRefreshLayout.setEnabled(false);
                 break;
             case NavDrawerIdentifier.IDENTIFIER_FORUM:
                 ForumListProvider forumListProvider = new ForumListProvider(getActivity(), listView);
                 forumListProvider.buildList();
+                mSwipeRefreshLayout.setEnabled(true);
                 break;
             case NavDrawerIdentifier.IDENTIFIER_DEVDB:
                 DevDBListProvider devDBListProvider = new DevDBListProvider(getActivity(), listView);
                 devDBListProvider.buildList();
+                mSwipeRefreshLayout.setEnabled(true);
                 break;
         }
         if (state != null) {

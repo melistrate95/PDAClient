@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import deadlion.com.pdaclient.R;
+import deadlion.com.pdaclient.controller.fragments.ListAllFragment;
+import deadlion.com.pdaclient.controller.provider.main_list.FavoritePostListProvider;
+import deadlion.com.pdaclient.database.DbHelper;
 import deadlion.com.pdaclient.model.Post;
 import deadlion.com.pdaclient.model.enum_model.PostCategory;
 
@@ -33,8 +36,10 @@ public class OnPostOverflowSelectedListener implements View.OnClickListener {
             public boolean onMenuItemSelected(MenuBuilder menu, MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.add_to_favorite:
+                        addToFavorite(post);
                         return true;
                     case R.id.remove_from_favorite:
+                        removeFromFavorite(post);
                         return true;
                     case R.id.copy_in_buffer:
                         copyInBuffer(post);
@@ -70,5 +75,21 @@ public class OnPostOverflowSelectedListener implements View.OnClickListener {
         ((ClipboardManager) context.getSystemService(context.CLIPBOARD_SERVICE)).setText(bufferUrl);
         Toast toast = Toast.makeText(context, context.getResources().getString(R.string.copy_url), Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+    private void addToFavorite(Post addPost) {
+        Post favoritePost = addPost;
+        favoritePost.setCategory(PostCategory.FAVORITE_CATEGORY);
+        DbHelper dbHelper = new DbHelper(context);
+        dbHelper.getPostTable().insert(favoritePost);
+        Toast.makeText(context, context.getResources().getString(R.string.add_to_favorite), Toast.LENGTH_SHORT).show();
+    }
+
+    private void removeFromFavorite(Post removePost) {
+        DbHelper dbHelper = new DbHelper(context);
+        dbHelper.getPostTable().delete(removePost);
+        FavoritePostListProvider favoritePostListProvider = new FavoritePostListProvider(context, ListAllFragment.getListView());
+        favoritePostListProvider.buildList();
+        ListAllFragment.getmSwipeRefreshLayout().setEnabled(false);
     }
 }
