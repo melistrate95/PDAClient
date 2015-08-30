@@ -11,7 +11,9 @@ import android.widget.Toast;
 
 import deadlion.com.pdaclient.R;
 import deadlion.com.pdaclient.controller.fragments.ListAllFragment;
+import deadlion.com.pdaclient.controller.loader.FavoriteLoader;
 import deadlion.com.pdaclient.controller.provider.main_list.FavoritePostListProvider;
+import deadlion.com.pdaclient.controller.provider.setting.InternetProvider;
 import deadlion.com.pdaclient.database.DbHelper;
 import deadlion.com.pdaclient.model.Post;
 import deadlion.com.pdaclient.model.enum_model.PostCategory;
@@ -45,7 +47,7 @@ public class OnPostOverflowSelectedListener implements View.OnClickListener {
                         copyInBuffer(post);
                         return true;
                     case R.id.share:
-                        shareNewsData(post);
+                        sharePostData(post);
                         return true;
                     default:
                         return super.onMenuItemSelected(menu, item);
@@ -61,13 +63,18 @@ public class OnPostOverflowSelectedListener implements View.OnClickListener {
         popupMenu.show();
     }
 
-    private void shareNewsData(Post sharePost) {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, sharePost.getUrl());
-        intent.putExtra(Intent.EXTRA_SUBJECT, sharePost.getTitle());
-        intent = Intent.createChooser(intent, context.getString(R.string.share));
-        context.startActivity(intent);
+    private void sharePostData(Post sharePost) {
+        if (InternetProvider.isConnected(context)) {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            intent.putExtra(Intent.EXTRA_TEXT, sharePost.getUrl());
+            intent.putExtra(Intent.EXTRA_SUBJECT, sharePost.getTitle());
+            intent = Intent.createChooser(intent, context.getString(R.string.share));
+            context.startActivity(intent);
+        }
+        else {
+            Toast.makeText(context, context.getResources().getString(R.string.no_connected), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void copyInBuffer(Post copyPost) {
@@ -79,9 +86,8 @@ public class OnPostOverflowSelectedListener implements View.OnClickListener {
     private void addToFavorite(Post addPost) {
         Post favoritePost = addPost;
         favoritePost.setCategory(PostCategory.FAVORITE_CATEGORY);
-        DbHelper dbHelper = new DbHelper(context);
-        dbHelper.getPostTable().insert(favoritePost);
-        Toast.makeText(context, context.getResources().getString(R.string.add_post), Toast.LENGTH_SHORT).show();
+        FavoriteLoader favoriteLoader = new FavoriteLoader(context, favoritePost);
+        favoriteLoader.loadText();
     }
 
     private void removeFromFavorite(Post removePost) {

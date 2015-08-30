@@ -37,6 +37,14 @@ public class PostTable extends BaseTable<Post> {
         return getBy(COLUMN_URL + "=?", new String[]{url}, null, null, null, null).get(0);
     }
 
+    public Post getPost(String url, PostCategory category) {
+        ArrayList<Post> posts = getBy(COLUMN_URL + "=? and " + COLUMN_CATEGORY + "=?", new String[]{url, category.toString()}, null, null, null, null);
+        if (posts.size() != 0) {
+            return posts.get(0);
+        }
+        return null;
+    }
+
     public int delete(PostCategory category) {
         return deleteBy(COLUMN_CATEGORY + "=?", new String[]{category.toString()});
     }

@@ -7,7 +7,9 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
 
+import deadlion.com.pdaclient.controller.activity.PostActivity;
 import deadlion.com.pdaclient.controller.fragments.PostFragment;
+import deadlion.com.pdaclient.controller.loader.PostLoader;
 import deadlion.com.pdaclient.model.Post;
 
 /**

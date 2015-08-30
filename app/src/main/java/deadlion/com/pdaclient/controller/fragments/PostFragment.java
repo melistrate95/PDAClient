@@ -27,11 +27,6 @@ public class PostFragment extends Fragment {
 
     public static WebView webView;
     String url;
-    private static Post post;
-
-    public static Post getPost() {
-        return post;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,16 +39,13 @@ public class PostFragment extends Fragment {
         View v = inflater.inflate(R.layout.web_fragment, container, false);
         webView  = (WebView) v.findViewById(R.id.web_view);
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.getSettings().setDefaultTextEncodingName("windows-1251");
         webView.setWebViewClient(new MyClient());
         Bundle args = getArguments();
         url = args.getString("url");
         /******************************************/
-        FullPostLoader fullPostLoader = new FullPostLoader(webView, url);
+        FullPostLoader fullPostLoader = new FullPostLoader(getActivity(), webView, url);
         fullPostLoader.loadPost();
         /******************************************/
-        post = PostLoader.getArrayPosts().get(PostActivity.getViewPager().getCurrentItem());
-        PostActivity.getToolbarProvider().buildToolbar(post.getTitle());
         return v;
     }
 

@@ -24,13 +24,17 @@ public class OnListItemClickListener implements AdapterView.OnItemClickListener 
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent;
         switch (MainActivity.lastNavDrawerIdentifier) {
             case NavDrawerIdentifier.IDENTIFIER_POST:
-                Intent intent = new Intent(context, PostActivity.class);
+                intent = new Intent(context, PostActivity.class);
                 intent.putExtra("position", position);
                 context.startActivity(intent);
                 break;
             case NavDrawerIdentifier.IDENTIFIER_FAVORITE_POST:
+                intent = new Intent(context, PostActivity.class);
+                intent.putExtra("position", position);
+                context.startActivity(intent);
                 break;
             case NavDrawerIdentifier.IDENTIFIER_FORUM:
                 break;
