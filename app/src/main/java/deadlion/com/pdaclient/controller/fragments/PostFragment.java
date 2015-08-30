@@ -39,6 +39,7 @@ public class PostFragment extends Fragment {
         View v = inflater.inflate(R.layout.web_fragment, container, false);
         webView  = (WebView) v.findViewById(R.id.web_view);
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setDefaultTextEncodingName("windows-1251");
         webView.setWebViewClient(new MyClient());
         Bundle args = getArguments();
         url = args.getString("url");
